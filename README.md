@@ -1,1 +1,6 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=22157940&assignment_repo_type=AssignmentRepo)
+
+# 콘솔 게임 제작 프로젝트 (KGA)
+## 프로젝트 정보
+### 제목 : The Logue
+### 장르 : 로그라이크
