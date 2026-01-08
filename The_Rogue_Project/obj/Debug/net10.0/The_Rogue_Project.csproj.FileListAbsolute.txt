@@ -1,0 +1,15 @@
+C:\Users\shins\Documents\GitHub\04-oop-console-project-Hooni030\The_Rogue_Project\obj\Debug\net10.0\The_Rogue_Project.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\shins\Documents\GitHub\04-oop-console-project-Hooni030\The_Rogue_Project\obj\Debug\net10.0\The_Rogue_Project.AssemblyInfoInputs.cache
+C:\Users\shins\Documents\GitHub\04-oop-console-project-Hooni030\The_Rogue_Project\obj\Debug\net10.0\The_Rogue_Project.AssemblyInfo.cs
+C:\Users\shins\Documents\GitHub\04-oop-console-project-Hooni030\The_Rogue_Project\obj\Debug\net10.0\The_Rogue_Project.csproj.CoreCompileInputs.cache
+C:\Users\shins\Documents\GitHub\04-oop-console-project-Hooni030\The_Rogue_Project\obj\Debug\net10.0\The_Rogue_Project.sourcelink.json
+C:\Users\shins\Documents\GitHub\04-oop-console-project-Hooni030\The_Rogue_Project\bin\Debug\net10.0\The_Rogue_Project.exe
+C:\Users\shins\Documents\GitHub\04-oop-console-project-Hooni030\The_Rogue_Project\bin\Debug\net10.0\The_Rogue_Project.deps.json
+C:\Users\shins\Documents\GitHub\04-oop-console-project-Hooni030\The_Rogue_Project\bin\Debug\net10.0\The_Rogue_Project.runtimeconfig.json
+C:\Users\shins\Documents\GitHub\04-oop-console-project-Hooni030\The_Rogue_Project\bin\Debug\net10.0\The_Rogue_Project.dll
+C:\Users\shins\Documents\GitHub\04-oop-console-project-Hooni030\The_Rogue_Project\bin\Debug\net10.0\The_Rogue_Project.pdb
+C:\Users\shins\Documents\GitHub\04-oop-console-project-Hooni030\The_Rogue_Project\obj\Debug\net10.0\The_Rogue_Project.dll
+C:\Users\shins\Documents\GitHub\04-oop-console-project-Hooni030\The_Rogue_Project\obj\Debug\net10.0\refint\The_Rogue_Project.dll
+C:\Users\shins\Documents\GitHub\04-oop-console-project-Hooni030\The_Rogue_Project\obj\Debug\net10.0\The_Rogue_Project.pdb
+C:\Users\shins\Documents\GitHub\04-oop-console-project-Hooni030\The_Rogue_Project\obj\Debug\net10.0\The_Rogue_Project.genruntimeconfig.cache
+C:\Users\shins\Documents\GitHub\04-oop-console-project-Hooni030\The_Rogue_Project\obj\Debug\net10.0\ref\The_Rogue_Project.dll

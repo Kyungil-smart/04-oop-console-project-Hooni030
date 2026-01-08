@@ -2,7 +2,7 @@
 {
     static void Main(string[] args)
     {
-        GamaManager game = new GamaManager();
+        GameManager game = new GameManager();
 
         game.Run();
     }

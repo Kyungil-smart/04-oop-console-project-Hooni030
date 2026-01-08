@@ -3,7 +3,12 @@ public class GameManager
 {
     public static bool isGameOver;
 
-    public const string GameTitle = "|''||''| '||                 '||'                                       \r\n   ||     || ..     ....      ||         ...     ... . ... ...    ....  \r\n   ||     ||' ||  .|...||     ||       .|  '|.  || ||   ||  ||  .|...|| \r\n   ||     ||  ||  ||          ||       ||   ||   |''    ||  ||  ||      \r\n  .||.   .||. ||.  '|...'    .||.....|  '|..|'  '||||.  '|..'|.  '|...' \r\n                                               .|....'                  ";
+    public const string GameTitle = "|''||''| '||                 '||'                                       \r\n" +
+                                    "   ||     || ..     ....      ||         ...     ... . ... ...    ....  \r\n" +
+                                    "   ||     ||' ||  .|...||     ||       .|  '|.  || ||   ||  ||  .|...|| \r\n" +
+                                    "   ||     ||  ||  ||          ||       ||   ||   |''    ||  ||  ||      \r\n" +
+                                    "  .||.   .||. ||.  '|...'    .||.....|  '|..|'  '||||.  '|..'|.  '|...' \r\n" +
+                                    "                                               .|....'                  ";
 
     private PlayerCharacter _player;
 
@@ -37,14 +42,14 @@ public class GameManager
 
         SceneManager.OnSceneChange += InputManager.ResetKey;
 
-        //_player = new PlayerCharacter();
+        _player = new PlayerCharacter();
 
-        //SceneManager.AddScene("MainMenu", new MainMenuScene());
-        //SceneManager.AddScene("Stage", new StageScene(_player));
-        //SceneManager.AddScene("StageSelect", new StageSelectScene());
-        //SceneManager.AddScene("Guide", new GuideScene());
-        //SceneManager.AddScene("Credit", new CreditScene());
-        //SceneManager.AddScene("Log", new LogScene());
+        SceneManager.AddScene("MainMenu", new MainMenuScene());
+        SceneManager.AddScene("Stage", new StageScene(_player));
+        SceneManager.AddScene("StageSelect", new StageSelectScene());
+        SceneManager.AddScene("Guide", new GuideScene());
+        SceneManager.AddScene("Credit", new CreditScene());
+        SceneManager.AddScene("Log", new LogScene());
 
         SceneManager.ChangeScene("MainMenu");
 
