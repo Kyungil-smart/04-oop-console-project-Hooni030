@@ -4,10 +4,12 @@
 
     private static readonly ConsoleKey[] _Keys =
     {
+        // 이동키 상하좌우
         ConsoleKey.UpArrow,
         ConsoleKey.DownArrow,
         ConsoleKey.LeftArrow,
         ConsoleKey.RightArrow,
+
         ConsoleKey.I, // 인벤토리
         ConsoleKey.L, // 로그키
         ConsoleKey.Enter // 선택

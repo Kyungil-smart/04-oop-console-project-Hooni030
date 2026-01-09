@@ -10,6 +10,7 @@
         _mainMenu.Add("게임 시작", GameStart);
         _mainMenu.Add("도움말", GameGuide);
         _mainMenu.Add("크레딧", Credit);
+        //_mainMenu.Add("", null);
         _mainMenu.Add("게임 종료", GameQuit);
     }
     public override void Enter()
@@ -30,7 +31,7 @@
         Console.SetCursorPosition(0, 2);
         GameManager.GameTitle.Print(ConsoleColor.Magenta);
 
-        _mainMenu.Render(30, 10);
+        _mainMenu.Render(30, 15);
     }
     public override void Exit()
     {

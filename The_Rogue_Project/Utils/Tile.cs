@@ -18,6 +18,6 @@
         if (HasGameObject)
             OnTileObject.Symbol.Print();
         else
-            ' '.Print();
+            ' '.Print(forColor:default,ConsoleColor.Gray);
     }
 }

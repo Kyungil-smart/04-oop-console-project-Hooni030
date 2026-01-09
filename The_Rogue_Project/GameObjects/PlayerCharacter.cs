@@ -1,32 +1,55 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.Design;
-
-public class PlayerCharacter : GameObject
+﻿public class PlayerCharacter : GameObject
 {
-    public ObservableProperty<int> HP = new ObservableProperty<int>(5);
-    public ObservableProperty<int> MP = new ObservableProperty<int>(3);
+    //public ObservableProperty<int> HP;
     public Tile[,] Field { get; set; }
 
     private Inventory _inventory;
     public bool IsActiveControl { get; private set; }
     public PlayerCharacter() => Init();
 
-    private string _healthGauge;
-    private string _manaGauge;
+    private const int Stat_UI_Width = 18;
+    private const int Stat_UI_Height = 10;
+    private Ractangle StatUIWindow;
 
-    public void Init()
+    private const int Level_UI_Width = 25;
+    private const int Level_UI_Height = 6;
+    private Ractangle LevelUIWindow;
+
+    private int Level { get; set; }
+    public int Exp { get; set; }
+    public int MaxHp { get; set; }
+    private int _CurrentHp;
+    private string _hpBar = "🟥";
+
+    private float _BaseDamage;
+    public float CurrentDamage { get; set; }
+
+    public int MaxShield { get; set; }
+    public int CurrentShield { get; set; }
+
+    private string _ShieldBar = "🛡";
+
+
+    private void Init()
     {
         Symbol = 'P';
         IsActiveControl = true;
 
         _inventory = new Inventory(this);
 
-        HP.AddListener(SetHealthGauge);
-        HP.Value = 5;
-        _healthGauge = "❤️❤️❤️❤️❤️";
+        StatUIWindow = new Ractangle(26, 0, Stat_UI_Width, Stat_UI_Height);
+        LevelUIWindow = new Ractangle(0, 10, Level_UI_Width, Level_UI_Height);
 
-        MP.AddListener(SetManaGauge);
-        _manaGauge = "🔵🔵🔵";
+        //HP = new ObservableProperty<int> { Value = _playerMaxHp };
+
+        //HP.AddListener(SetHealthGauge);
+    }
+
+    public void StatInit()
+    {
+        _CurrentHp = MaxHp;
+
+        _BaseDamage = 2;
     }
 
     public void Update()
@@ -55,14 +78,6 @@ public class PlayerCharacter : GameObject
         if (InputManager.IsCorrectkey(ConsoleKey.Enter))
         {
             _inventory.Select();
-        }
-        if (InputManager.IsCorrectkey(ConsoleKey.F))
-        {
-            HP.Value--;
-        }
-        if (InputManager.IsCorrectkey(ConsoleKey.Spacebar))
-        {
-            Heal(2);
         }
     }
 
@@ -99,9 +114,10 @@ public class PlayerCharacter : GameObject
 
     public void Render()
     {
-        DrawHealthGauge();
-        DrawManaGauge();
+        StatUIWindow.Draw(ConsoleColor.Yellow);
+        LevelUIWindow.Draw(ConsoleColor.DarkYellow);
         _inventory.Render();
+        RenderPlayerUI();
     }
 
     public void AddItem(Item item)
@@ -109,64 +125,50 @@ public class PlayerCharacter : GameObject
         _inventory.Add(item);
     }
 
-    public void DrawHealthGauge()
+    public void RenderPlayerUI()
     {
-        Console.SetCursorPosition(40, 5);
-        _healthGauge.Print();
+        RenderPlayerHP(28, 1);
+        RenderPlayerShield(28, 4);
+        RenderPlayerDamage(28, 7);
     }
 
-    public void SetHealthGauge(int health)
+    public void RenderPlayerHP(int x, int y)
     {
-        switch (HP.Value)
+        string hpUI = _CurrentHp.ToString() + " / " + MaxHp.ToString();
+        Console.SetCursorPosition(x, y);
+        hpUI.Print();
+
+        Console.SetCursorPosition(x, y + 1);
+        for (int i = 0; i < _CurrentHp; i++)
         {
-            case 5:
-                _healthGauge = "❤️❤️❤️❤️❤️";
-                break;
-            case 4:
-                _healthGauge = "❤️❤️❤️❤️💔";
-                break;
-            case 3:
-                _healthGauge = "❤️❤️❤️💔💔";
-                break;
-            case 2:
-                _healthGauge = "❤️❤💔💔💔";
-                break;
-            case 1:
-                _healthGauge = "❤️💔💔💔💔";
-                break;
-            default:
-                _healthGauge = "💔💔💔💔💔";
-                break;
+            _hpBar.Print();
         }
     }
-
-    public void Heal(int value)
+    public void RenderPlayerShield(int x, int y)
     {
-        HP.Value += value;
-    }
-
-    public void DrawManaGauge()
-    {
-        Console.SetCursorPosition(40, 7);
-        _manaGauge.Print();
-    }
-
-    public void SetManaGauge(int mana)
-    {
-        switch (HP.Value)
+        string shieldUI = CurrentShield.ToString() + " / " + MaxShield.ToString();
+        Console.SetCursorPosition(x, y);
+        shieldUI.Print();
+        Console.SetCursorPosition(x, y + 1);
+        for (int i = 0; i < CurrentShield; i++)
         {
-            case 3:
-                _healthGauge = "🔵🔵🔵";
-                break;
-            case 2:
-                _healthGauge = "🔵🔵";
-                break;
-            case 1:
-                _healthGauge = "🔵";
-                break;
-            default:
-                _healthGauge = "";
-                break;
+            _ShieldBar.Print();
         }
     }
+    public void RenderPlayerDamage(int x, int y)
+    {
+        string damageUI = "공격력 : " + CurrentDamage.ToString();
+
+        Console.SetCursorPosition(x, y);
+        damageUI.Print();
+    }
+    //public void SetHealthGauge(int health)
+    //{
+
+    //}
+
+    //public void Heal(int value)
+    //{
+    //    //HP.Value += value;
+    //}
 }

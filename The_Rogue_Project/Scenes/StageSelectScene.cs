@@ -5,9 +5,10 @@
     public void Init()
     {
         _stageList = new MenuList();
-        _stageList.Add("쉬움", SelectStage);
-        _stageList.Add("보통", SelectStage);
-        _stageList.Add("어려움", SelectStage);
+        _stageList.Add("쉬움", EasyStage);
+        _stageList.Add("보통", NormalStage);
+        _stageList.Add("어려움", HardStage);
+        _stageList.Add("", null);
         _stageList.Add("초기 화면", MainMenu);
     }
     public override void Enter()
@@ -25,18 +26,26 @@
     }
     public override void Render()
     {
-        Console.SetCursorPosition(11, 3);
+        Console.SetCursorPosition(17, 3);
         "난이도 선택".Print(ConsoleColor.DarkMagenta);
 
-        _stageList.Render(12, 5);
+        _stageList.Render(15, 5);
     }
     public override void Exit()
     {
     }
 
-    public void SelectStage()
+    public void EasyStage()
     {
-        SceneManager.ChangeScene("Stage");
+        SceneManager.ChangeScene("Easy");
+    }
+    public void NormalStage()
+    {
+        SceneManager.ChangeScene("Normal");
+    }
+    public void HardStage()
+    {
+        SceneManager.ChangeScene("Hard");
     }
     public void MainMenu()
         => SceneManager.ChangeScene("MainMenu");

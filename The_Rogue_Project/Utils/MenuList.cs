@@ -90,14 +90,21 @@
 
         if (_currentMenuIndex < 0)
             _currentMenuIndex = 0;
+
+        if (_menus[_currentMenuIndex].action == null)
+            _currentMenuIndex--;
     }
 
     public void SelectDown()
     {
         _currentMenuIndex++;
 
+
         if (_currentMenuIndex >= _menus.Count)
             _currentMenuIndex = _menus.Count - 1;
+
+        if (_menus[_currentMenuIndex].action == null)
+            _currentMenuIndex++;
     }
 
     public void Render(int x, int y)
