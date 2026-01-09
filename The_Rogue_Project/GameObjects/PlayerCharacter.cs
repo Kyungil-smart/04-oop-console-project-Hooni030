@@ -4,6 +4,7 @@ public class PlayerCharacter : GameObject
 {
     public ObservableProperty<int> Level;
     public ObservableProperty<float> Exp;
+    public ObservableProperty<float> HP;
     public Tile[,] Field { get; set; }
 
     private Inventory _inventory;
@@ -13,7 +14,7 @@ public class PlayerCharacter : GameObject
     private int stageWidth = StageScene.Field_Width;
     private int stageHeight = StageScene.Field_Height;
 
-    private const int Stat_UI_Width = 18;
+    private const int Stat_UI_Width = 24;
     private const int Stat_UI_Height = 10;
     private Ractangle StatUIWindow;
 
@@ -22,23 +23,21 @@ public class PlayerCharacter : GameObject
     private Ractangle LevelUIWindow;
 
     private string LevelIcon = "⭐";
-    private int MaxExp { get; set; }
-    private float expPercent {  get; set; }
+    private int MaxExp;
+    private float _expPercent;
 
     private string ExpIcon = "✨";
     private string ExpBar = "🟩";
     public int MaxHp { get; set; }
-    private int _currentHp;
     private float _hpPercent;
     private string _hpBar = "🟥";
 
     public int BaseDamage { get; set; }
-    private int _currentDamage;
+    private int _damage;
     private string _damageIcon = "🗡️";
 
     public int MaxShield { get; set; }
     public int CurrentShield { get; set; }
-
     private string _ShieldBar = "🛡";
 
 
@@ -50,22 +49,26 @@ public class PlayerCharacter : GameObject
         _inventory = new Inventory(this);
 
         StatUIWindow = new Ractangle(0, 7, Stat_UI_Width, Stat_UI_Height);
-        LevelUIWindow = new Ractangle(19, 0, Level_UI_Width, Level_UI_Height);
+        LevelUIWindow = new Ractangle(24, 0, Level_UI_Width, Level_UI_Height);
 
-        Exp = new ObservableProperty<float>(0);
         Level = new ObservableProperty<int>(1);
+        Exp = new ObservableProperty<float>(0);
+        HP = new ObservableProperty<float>();
 
         Exp.AddListener(NextExp);
         Level.AddListener(NextLevel);
+        HP.AddListener(SetHP);
+
+        HP.Value = MaxHp;
     }
 
     public void StatInit()
     {
-        MaxExp = 3;
+        MaxExp = 4;
 
-        _currentHp = MaxHp;
+        HP.Value = MaxHp;
 
-        _currentDamage = BaseDamage;
+        _damage = BaseDamage;
     }
 
     public void Update()
@@ -93,7 +96,7 @@ public class PlayerCharacter : GameObject
         }
         if (InputManager.IsCorrectkey(ConsoleKey.Enter))
         {
-            Exp.Value++;
+            Exp.Value+=3;
             _inventory.Select();
         }
     }
@@ -150,17 +153,18 @@ public class PlayerCharacter : GameObject
         RenderHP(2, 8);
         RenderShield(2, 11);
         RenderDamage(2, 14);
-        RenderLevel(22, 1);
+        RenderLevel(26, 1);
     }
 
     public void RenderHP(int x, int y)
     {
-        string hpUI = "체력 : " + _currentHp.ToString() + " / " + MaxHp.ToString();
+        string hpUI = "체력 : " + HP.Value.ToString() + " / " + MaxHp.ToString();
         Console.SetCursorPosition(x, y);
         hpUI.Print();
+        Console.SetCursorPosition(2, 9);
 
-        Console.SetCursorPosition(x, y + 1);
-        for (int i = 0; i < _currentHp; i++)
+        _hpPercent = HP.Value / MaxHp * 10;
+        for (int i = 0; i < _hpPercent; i++)
         {
             _hpBar.Print();
         }
@@ -179,16 +183,19 @@ public class PlayerCharacter : GameObject
     public void RenderDamage(int x, int y)
     {
         Console.SetCursorPosition(x, y);
-        string damageUI = "공격력 : " + _currentDamage.ToString();
+        string damageUI = "공격력 : " + _damage.ToString();
         damageUI.Print();
 
         Console.SetCursorPosition(x, y+1);
-        for(int i = 0; i< _currentDamage; i++)
+        for(int i = 0; i< _damage; i++)
         {
             _damageIcon.Print();
         }
     }
 
+    public void SetHP(float HP)
+    {
+    }
     public void RenderLevel(int x, int y)
     {
         string levelUI = LevelIcon + " Level : " + Level.Value.ToString();
@@ -198,8 +205,8 @@ public class PlayerCharacter : GameObject
         Console.SetCursorPosition(x, y + 2);
         expUI.Print();
 
-        Console.SetCursorPosition(22, 4);
-        for (int i = 0; i < expPercent; i++)
+        Console.SetCursorPosition(26, 4);
+        for (int i = 0; i < _expPercent; i++)
         {
             ExpBar.Print();
         }
@@ -207,12 +214,11 @@ public class PlayerCharacter : GameObject
 
     public void NextExp(float exp)
     {
-        expPercent = Exp.Value / MaxExp * 10;
-        if (expPercent >= 10)
+        _expPercent = Exp.Value / MaxExp * 10;
+        if (_expPercent >= 10)
         {
-
-            Debug.Log($"{expPercent}");
-            Exp.Value = 0;
+            Debug.Log($"{_expPercent}");
+            Exp.Value = Exp.Value - MaxExp;
             Level.Value++;
         }
     }
@@ -220,6 +226,13 @@ public class PlayerCharacter : GameObject
     public void NextLevel(int level)
     {
         MaxExp = MaxExp/2 * level / 3 + 3;
+        MaxHp += level/2 + 1;
+        if (HP.Value + HP.Value / 3 < MaxHp)
+            HP.Value += MaxHp / 3;
+        else
+            HP.Value = MaxHp;
+
+        _damage = BaseDamage + level / 3;
     }
 
 
