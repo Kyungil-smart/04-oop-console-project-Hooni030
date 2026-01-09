@@ -13,8 +13,10 @@
         Height = height;
     }
 
-    public void Draw()
+    public void Draw(ConsoleColor color = ConsoleColor.Gray)
     {
+        Console.ForegroundColor = color;
+
         if (Width < 2 || Height < 2) return;
 
         int bw = Console.BufferWidth;
@@ -28,6 +30,7 @@
 
         // 맨 윗줄
         Console.SetCursorPosition(X, Y);
+
         for (int i = 0; i < Width; i++)
         {
             if (i == 0 || i == Width - 1) '*'.Print();
@@ -57,5 +60,7 @@
             if (i == 0 || i == Width - 1) '*'.Print();
             else '-'.Print();
         }
+
+        Console.ResetColor();
     }
 }
