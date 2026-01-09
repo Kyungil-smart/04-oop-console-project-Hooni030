@@ -1,28 +1,40 @@
-﻿public class PlayerCharacter : GameObject
+﻿using System.Runtime.InteropServices;
+
+public class PlayerCharacter : GameObject
 {
-    //public ObservableProperty<int> HP;
+    public ObservableProperty<int> Level;
+    public ObservableProperty<float> Exp;
     public Tile[,] Field { get; set; }
 
     private Inventory _inventory;
     public bool IsActiveControl { get; private set; }
     public PlayerCharacter() => Init();
 
+    private int stageWidth = StageScene.Field_Width;
+    private int stageHeight = StageScene.Field_Height;
+
     private const int Stat_UI_Width = 18;
     private const int Stat_UI_Height = 10;
     private Ractangle StatUIWindow;
 
     private const int Level_UI_Width = 25;
-    private const int Level_UI_Height = 6;
+    private const int Level_UI_Height = 7;
     private Ractangle LevelUIWindow;
 
-    private int Level { get; set; }
-    public int Exp { get; set; }
+    private string LevelIcon = "⭐";
+    private int MaxExp { get; set; }
+    private float expPercent {  get; set; }
+
+    private string ExpIcon = "✨";
+    private string ExpBar = "🟩";
     public int MaxHp { get; set; }
-    private int _CurrentHp;
+    private int _currentHp;
+    private float _hpPercent;
     private string _hpBar = "🟥";
 
-    private float _BaseDamage;
-    public float CurrentDamage { get; set; }
+    public int BaseDamage { get; set; }
+    private int _currentDamage;
+    private string _damageIcon = "🗡️";
 
     public int MaxShield { get; set; }
     public int CurrentShield { get; set; }
@@ -37,19 +49,23 @@
 
         _inventory = new Inventory(this);
 
-        StatUIWindow = new Ractangle(26, 0, Stat_UI_Width, Stat_UI_Height);
-        LevelUIWindow = new Ractangle(0, 10, Level_UI_Width, Level_UI_Height);
+        StatUIWindow = new Ractangle(0, 7, Stat_UI_Width, Stat_UI_Height);
+        LevelUIWindow = new Ractangle(19, 0, Level_UI_Width, Level_UI_Height);
 
-        //HP = new ObservableProperty<int> { Value = _playerMaxHp };
+        Exp = new ObservableProperty<float>(0);
+        Level = new ObservableProperty<int>(1);
 
-        //HP.AddListener(SetHealthGauge);
+        Exp.AddListener(NextExp);
+        Level.AddListener(NextLevel);
     }
 
     public void StatInit()
     {
-        _CurrentHp = MaxHp;
+        MaxExp = 3;
 
-        _BaseDamage = 2;
+        _currentHp = MaxHp;
+
+        _currentDamage = BaseDamage;
     }
 
     public void Update()
@@ -77,6 +93,7 @@
         }
         if (InputManager.IsCorrectkey(ConsoleKey.Enter))
         {
+            Exp.Value++;
             _inventory.Select();
         }
     }
@@ -95,6 +112,9 @@
         Vector nextPos = current + direction;
 
         // 1. 맵 바깥은 아닌지?
+        if (nextPos.X < 0 || nextPos.X > StageScene.Field_Width - 1 ||
+            nextPos.Y < 0 || nextPos.Y > StageScene.Field_Height - 1)
+            return;
         // 2. 벽인지?
 
         GameObject nextTileObject = Field[nextPos.Y, nextPos.X].OnTileObject;
@@ -127,26 +147,27 @@
 
     public void RenderPlayerUI()
     {
-        RenderPlayerHP(28, 1);
-        RenderPlayerShield(28, 4);
-        RenderPlayerDamage(28, 7);
+        RenderHP(2, 8);
+        RenderShield(2, 11);
+        RenderDamage(2, 14);
+        RenderLevel(22, 1);
     }
 
-    public void RenderPlayerHP(int x, int y)
+    public void RenderHP(int x, int y)
     {
-        string hpUI = _CurrentHp.ToString() + " / " + MaxHp.ToString();
+        string hpUI = "체력 : " + _currentHp.ToString() + " / " + MaxHp.ToString();
         Console.SetCursorPosition(x, y);
         hpUI.Print();
 
         Console.SetCursorPosition(x, y + 1);
-        for (int i = 0; i < _CurrentHp; i++)
+        for (int i = 0; i < _currentHp; i++)
         {
             _hpBar.Print();
         }
     }
-    public void RenderPlayerShield(int x, int y)
+    public void RenderShield(int x, int y)
     {
-        string shieldUI = CurrentShield.ToString() + " / " + MaxShield.ToString();
+        string shieldUI = "방어막 : " + CurrentShield.ToString() + " / " + MaxShield.ToString();
         Console.SetCursorPosition(x, y);
         shieldUI.Print();
         Console.SetCursorPosition(x, y + 1);
@@ -155,13 +176,53 @@
             _ShieldBar.Print();
         }
     }
-    public void RenderPlayerDamage(int x, int y)
+    public void RenderDamage(int x, int y)
     {
-        string damageUI = "공격력 : " + CurrentDamage.ToString();
-
         Console.SetCursorPosition(x, y);
+        string damageUI = "공격력 : " + _currentDamage.ToString();
         damageUI.Print();
+
+        Console.SetCursorPosition(x, y+1);
+        for(int i = 0; i< _currentDamage; i++)
+        {
+            _damageIcon.Print();
+        }
     }
+
+    public void RenderLevel(int x, int y)
+    {
+        string levelUI = LevelIcon + " Level : " + Level.Value.ToString();
+        Console.SetCursorPosition(x, y);
+        levelUI.Print();
+        string expUI = ExpIcon + " Exp" + " " + Exp.Value.ToString() + " / " + MaxExp.ToString();
+        Console.SetCursorPosition(x, y + 2);
+        expUI.Print();
+
+        Console.SetCursorPosition(22, 4);
+        for (int i = 0; i < expPercent; i++)
+        {
+            ExpBar.Print();
+        }
+    }
+
+    public void NextExp(float exp)
+    {
+        expPercent = Exp.Value / MaxExp * 10;
+        if (expPercent >= 10)
+        {
+
+            Debug.Log($"{expPercent}");
+            Exp.Value = 0;
+            Level.Value++;
+        }
+    }
+
+    public void NextLevel(int level)
+    {
+        MaxExp = MaxExp/2 * level / 3 + 3;
+    }
+
+
     //public void SetHealthGauge(int health)
     //{
 
