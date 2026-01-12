@@ -10,7 +10,7 @@
 
     public Monster(int hp, int damage, float stepInterval)
     {
-        Symbol = "👾";
+        Symbol = "😈";
         Hp = hp;
         Damage = damage;
         StepInterval = stepInterval;

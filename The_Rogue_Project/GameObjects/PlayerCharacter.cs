@@ -80,8 +80,6 @@ public class PlayerCharacter : GameObject
         Exp.AddListener(NextExp);
         Level.AddListener(NextLevel);
         HP.AddListener(null);
-
-        HP.Value = MaxHp;
     }
 
     public void Update()
@@ -125,22 +123,6 @@ public class PlayerCharacter : GameObject
         }
     }
 
-    private void FireBullet()
-    {
-       bullet.FiredBullet++;
-
-        if (!IsFireBullet() || bullet.FiredBullet >= 5)
-              return;
-        Vector bV = Position + _bulletVector;
-        Field[bV.Y, bV.X].OnTileObject = bullet;
-    }
-    public bool IsFireBullet()
-    {
-        if (bullet.FiredBullet <= bullet.MaxAmount)
-            return true;
-        else
-            return false;
-    }
 
     private void Move(Vector direction)
     {
@@ -269,7 +251,7 @@ public class PlayerCharacter : GameObject
         Console.SetCursorPosition(x, y + 2);
         expUI.Print();
 
-        Console.SetCursorPosition(26, 4);
+        Console.SetCursorPosition(x, y + 3);
         for (int i = 0; i < _expPercent; i++)
         {
             ExpBar.Print();

@@ -8,7 +8,7 @@
 
     public Bullet(Vector start, Vector direction, int damage, float stepInterval)
     {
-        Symbol = "•";
+        Symbol = "🔹";
         Position = start;
         Direction = direction;
         Damage = damage;

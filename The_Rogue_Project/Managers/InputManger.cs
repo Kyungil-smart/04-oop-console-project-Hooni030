@@ -26,6 +26,7 @@
 
     public static void Poll()
     {
+        _current = ConsoleKey.None;
         while (Console.KeyAvailable)
         {
             ConsoleKey input = Console.ReadKey(true).Key;

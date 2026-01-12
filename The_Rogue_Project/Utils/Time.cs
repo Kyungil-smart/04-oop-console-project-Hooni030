@@ -12,13 +12,13 @@ public class Time
     public static double TotalTime { get; private set; }
 
     // Stopwatch 인스턴스 생성
-    private static Stopwatch _stopwatch;
+    private static Stopwatch _stopwatch = Stopwatch.StartNew();
 
     public Time() => Init();
 
     public static void Init()
     {
-        _stopwatch = Stopwatch.StartNew();
+        _stopwatch.Restart();
         _prevTime = 0;
         DeltaTime = 0d;
         TotalTime = 0d;
