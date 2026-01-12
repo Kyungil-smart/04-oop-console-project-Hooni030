@@ -3,8 +3,10 @@
 public class Wall : GameObject
 {
 
-    public Wall() => Init();
+
+    public Wall()=> Init();
     private void Init()
     {
+        Symbol = "W";
     }
 }

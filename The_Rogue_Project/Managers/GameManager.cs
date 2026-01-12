@@ -25,7 +25,7 @@ public class GameManager
         // 초기화 함수 사용
         Init();
 
-        var sw = Stopwatch.StartNew();
+        Stopwatch sw = Stopwatch.StartNew();
         const int Frame = 25;
         const int FrameMs = 1000 / Frame;
 
@@ -100,7 +100,7 @@ public class GameManager
         SceneManager.AddScene("Log", new LogScene());
 
         // 초기 화면 메인 메뉴 씬으로 변경
-        SceneManager.ChangeScene("Easy");
+        SceneManager.ChangeScene("MainMenu");
 
         // 로그로 핀 포인트 체크
         Debug.Log("초기화 완료");

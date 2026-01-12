@@ -22,7 +22,7 @@
     }
     public override void Render()
     {
-        Console.SetCursorPosition(7, 2);
+        Console.SetCursorPosition(10, 2);
         Developer.Print(ConsoleColor.Green);
         Thread.Sleep(200);
         Console.WriteLine();
@@ -30,14 +30,14 @@
         {
             Thread.Sleep(300);
 
-            Console.SetCursorPosition(12, 4 + i);
+            Console.SetCursorPosition(15, 4 + i);
 
             Helper[i].Print(ConsoleColor.DarkYellow);
             Console.WriteLine();
         }
         Thread.Sleep(300);
 
-        _sceneMenu.Render(13, 10);
+        _sceneMenu.Render(14, 10);
     }
     public override void Exit()
     {

@@ -10,7 +10,7 @@
         _mainMenu.Add("게임 시작", GameStart);
         _mainMenu.Add("도움말", GameGuide);
         _mainMenu.Add("크레딧", Credit);
-        //_mainMenu.Add("", null);
+        _mainMenu.Add("", null);
         _mainMenu.Add("게임 종료", GameQuit);
     }
     public override void Enter()
@@ -19,12 +19,21 @@
     }
     public override void Update()
     {
-        if (InputManager.IsCorrectkey(ConsoleKey.UpArrow))
-            _mainMenu.SelectUp();
-        if (InputManager.IsCorrectkey(ConsoleKey.DownArrow))
-            _mainMenu.SelectDown();
-        if (InputManager.IsCorrectkey(ConsoleKey.Enter))
-            _mainMenu.Select();
+        ConsoleKey key = InputManager.UsedKey();
+        if (key == ConsoleKey.None) return;
+
+        switch (key)
+        {
+            case ConsoleKey.UpArrow:
+                _mainMenu.SelectUp();
+                break;
+            case ConsoleKey.DownArrow:
+                _mainMenu.SelectDown();
+                break;
+            case ConsoleKey.Enter:
+                _mainMenu.Select();
+                break;
+        }
     }
     public override void Render()
     {

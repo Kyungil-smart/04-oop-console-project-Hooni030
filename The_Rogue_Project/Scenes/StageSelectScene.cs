@@ -17,12 +17,21 @@
     }
     public override void Update()
     {
-        if (InputManager.IsCorrectkey(ConsoleKey.UpArrow))
-            _stageList.SelectUp();
-        if (InputManager.IsCorrectkey(ConsoleKey.DownArrow))
-            _stageList.SelectDown();
-        if (InputManager.IsCorrectkey(ConsoleKey.Enter))
-            _stageList.Select();
+        ConsoleKey key = InputManager.UsedKey();
+        if (key == ConsoleKey.None) return;
+
+        switch (key)
+        {
+            case ConsoleKey.UpArrow:
+                _stageList.SelectUp();
+                break;
+            case ConsoleKey.DownArrow:
+                _stageList.SelectDown();
+                break;
+            case ConsoleKey.Enter:
+                _stageList.Select();
+                break;
+        }
     }
     public override void Render()
     {

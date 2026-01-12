@@ -26,5 +26,8 @@
             else if (type == LogType.Warning) text.Print(ConsoleColor.Yellow, ConsoleColor.Red);
             Console.WriteLine();
         }
+
+        while (true) ;
+
     }
 }

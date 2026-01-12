@@ -11,16 +11,14 @@ public class PlayerCharacter : GameObject
     public bool IsActiveControl { get; private set; }
     public PlayerCharacter() => Init();
 
-    public Wall wall { get; set; }
-
     private int stageWidth = StageScene.Field_Width;
     private int stageHeight = StageScene.Field_Height;
 
-    private const int Stat_UI_Width = 24;
-    private const int Stat_UI_Height = 10;
+    private const int Stat_UI_Width = 27;
+    private const int Stat_UI_Height = 11;
     private Ractangle StatUIWindow;
 
-    private const int Level_UI_Width = 25;
+    private const int Level_UI_Width = 26;
     private const int Level_UI_Height = 7;
     private Ractangle LevelUIWindow;
 
@@ -45,13 +43,13 @@ public class PlayerCharacter : GameObject
 
     private void Init()
     {
-        Symbol = '▶';
+        Symbol = "⭐";
         IsActiveControl = true;
 
         _inventory = new Inventory(this);
 
         StatUIWindow = new Ractangle(0, 7, Stat_UI_Width, Stat_UI_Height);
-        LevelUIWindow = new Ractangle(24, 0, Level_UI_Width, Level_UI_Height);
+        LevelUIWindow = new Ractangle(27, 0, Level_UI_Width, Level_UI_Height);
 
         Level = new ObservableProperty<int>(1);
         Exp = new ObservableProperty<float>(0);
@@ -125,15 +123,18 @@ public class PlayerCharacter : GameObject
         Vector current = Position;
         Vector nextPos = current + direction;
 
-        GameObject nextTileObject = Field[nextPos.Y, nextPos.X].OnTileObject;
+
 
         // 1. 맵 바깥은 아닌지?
-        if (nextPos.X < 0 || nextPos.X > StageScene.Field_Width - 1 ||
-            nextPos.Y < 0 || nextPos.Y > StageScene.Field_Height - 1)
+        if (nextPos.X < 1 || nextPos.X > StageScene.Field_Width - 2 ||
+            nextPos.Y < 1 || nextPos.Y > StageScene.Field_Height - 2)
             return;
+
         // 2. 벽인지?
-        else if (nextTileObject == wall)
+        if (Field[nextPos.Y, nextPos.X].OnTileObject is Wall)
             return;
+
+        GameObject nextTileObject = Field[nextPos.Y, nextPos.X].OnTileObject;
 
 
         if (nextTileObject != null)
@@ -168,7 +169,7 @@ public class PlayerCharacter : GameObject
         RenderHP(2, 8);
         RenderShield(2, 11);
         RenderDamage(2, 14);
-        RenderLevel(26, 1);
+        RenderLevel(30, 1);
     }
 
     public void RenderHP(int x, int y)
@@ -176,7 +177,7 @@ public class PlayerCharacter : GameObject
         string hpUI = "체력 : " + HP.Value.ToString() + " / " + MaxHp.ToString();
         Console.SetCursorPosition(x, y);
         hpUI.Print();
-        Console.SetCursorPosition(2, 9);
+        Console.SetCursorPosition(x, y + 1);
 
         _hpPercent = HP.Value / MaxHp * 10;
         for (int i = 0; i < _hpPercent; i++)
@@ -214,8 +215,10 @@ public class PlayerCharacter : GameObject
     public void RenderLevel(int x, int y)
     {
         string levelUI = LevelIcon + " Level : " + Level.Value.ToString();
+
         Console.SetCursorPosition(x, y);
         levelUI.Print();
+
         string expUI = ExpIcon + " Exp" + " " + Exp.Value.ToString() + " / " + MaxExp.ToString();
         Console.SetCursorPosition(x, y + 2);
         expUI.Print();
