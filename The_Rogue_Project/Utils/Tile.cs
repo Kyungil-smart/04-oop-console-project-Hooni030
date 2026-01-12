@@ -15,9 +15,10 @@
 
     public void Print()
     {
+
         if (HasGameObject)
             OnTileObject.Symbol.Print();
         else
-            ' '.Print(forColor:default,ConsoleColor.Gray);
+            "  ".Print(default,ConsoleColor.DarkGray);
     }
 }

@@ -11,6 +11,8 @@ public class PlayerCharacter : GameObject
     public bool IsActiveControl { get; private set; }
     public PlayerCharacter() => Init();
 
+    public Wall wall { get; set; }
+
     private int stageWidth = StageScene.Field_Width;
     private int stageHeight = StageScene.Field_Height;
 
@@ -43,7 +45,7 @@ public class PlayerCharacter : GameObject
 
     private void Init()
     {
-        Symbol = 'P';
+        Symbol = '▶';
         IsActiveControl = true;
 
         _inventory = new Inventory(this);
@@ -73,31 +75,40 @@ public class PlayerCharacter : GameObject
 
     public void Update()
     {
-        if (InputManager.IsCorrectkey(ConsoleKey.I))
-            HandleControl();
+        ConsoleKey key = InputManager.UsedKey();
+        if (key == ConsoleKey.None) return;
 
-        if (InputManager.IsCorrectkey(ConsoleKey.UpArrow))
+        switch (key)
         {
-            Move(Vector.Up);
-            _inventory.SelectUp();
-        }
-        if (InputManager.IsCorrectkey(ConsoleKey.DownArrow))
-        {
-            Move(Vector.Down);
-            _inventory.SelectDown();
-        }
-        if (InputManager.IsCorrectkey(ConsoleKey.LeftArrow))
-        {
-            Move(Vector.Left);
-        }
-        if (InputManager.IsCorrectkey(ConsoleKey.RightArrow))
-        {
-            Move(Vector.Right);
-        }
-        if (InputManager.IsCorrectkey(ConsoleKey.Enter))
-        {
-            Exp.Value+=3;
-            _inventory.Select();
+            case ConsoleKey.I:
+                HandleControl();
+                break;
+
+            case ConsoleKey.UpArrow:
+                //Symbol = '▲';
+                Move(Vector.Up);
+                _inventory.SelectUp();
+                break;
+
+            case ConsoleKey.DownArrow:
+                //Symbol = '▼';
+                Move(Vector.Down);
+                _inventory.SelectDown();
+                break;
+
+            case ConsoleKey.LeftArrow:
+                //Symbol = '◀';
+                Move(Vector.Left);
+                break;
+
+            case ConsoleKey.RightArrow:
+                //Symbol = '▶';
+                Move(Vector.Right);
+                break;
+
+            case ConsoleKey.Enter:
+                _inventory.Select();
+                break;
         }
     }
 
@@ -114,13 +125,16 @@ public class PlayerCharacter : GameObject
         Vector current = Position;
         Vector nextPos = current + direction;
 
+        GameObject nextTileObject = Field[nextPos.Y, nextPos.X].OnTileObject;
+
         // 1. 맵 바깥은 아닌지?
         if (nextPos.X < 0 || nextPos.X > StageScene.Field_Width - 1 ||
             nextPos.Y < 0 || nextPos.Y > StageScene.Field_Height - 1)
             return;
         // 2. 벽인지?
+        else if (nextTileObject == wall)
+            return;
 
-        GameObject nextTileObject = Field[nextPos.Y, nextPos.X].OnTileObject;
 
         if (nextTileObject != null)
         {
@@ -132,6 +146,7 @@ public class PlayerCharacter : GameObject
 
         Field[Position.Y, Position.X].OnTileObject = null;
         Field[nextPos.Y, nextPos.X].OnTileObject = this;
+
         Position = nextPos;
     }
 

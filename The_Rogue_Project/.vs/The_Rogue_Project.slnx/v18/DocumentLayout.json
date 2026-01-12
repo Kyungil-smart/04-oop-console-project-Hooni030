@@ -7,28 +7,68 @@
       "RelativeMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|solutionrelative:gameobjects\\playercharacter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|c:\\users\\shins\\documents\\github\\04-oop-console-project-hooni030\\the_rogue_project\\manaers\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|solutionrelative:manaers\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|c:\\users\\shins\\documents\\github\\04-oop-console-project-hooni030\\the_rogue_project\\scenes\\stagescene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|solutionrelative:scenes\\stagescene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|c:\\users\\shins\\documents\\github\\04-oop-console-project-hooni030\\the_rogue_project\\utils\\textextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|solutionrelative:utils\\textextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|c:\\users\\shins\\documents\\github\\04-oop-console-project-hooni030\\the_rogue_project\\gameobjects\\walls.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|solutionrelative:gameobjects\\walls.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|c:\\users\\shins\\documents\\github\\04-oop-console-project-hooni030\\the_rogue_project\\gameobjects\\item\\expball.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|solutionrelative:gameobjects\\item\\expball.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|c:\\users\\shins\\documents\\github\\04-oop-console-project-hooni030\\the_rogue_project\\utils\\tile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|solutionrelative:utils\\tile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|c:\\users\\shins\\documents\\github\\04-oop-console-project-hooni030\\the_rogue_project\\gameobjects\\item\\potion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|solutionrelative:gameobjects\\item\\potion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|c:\\users\\shins\\documents\\github\\04-oop-console-project-hooni030\\the_rogue_project\\gameobjects\\gameobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|solutionrelative:gameobjects\\gameobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|c:\\users\\shins\\documents\\github\\04-oop-console-project-hooni030\\the_rogue_project\\utils\\observationproperty.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|solutionrelative:utils\\observationproperty.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|c:\\users\\shins\\documents\\github\\04-oop-console-project-hooni030\\the_rogue_project\\managers\\inputmanger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|solutionrelative:managers\\inputmanger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|c:\\users\\shins\\documents\\github\\04-oop-console-project-hooni030\\the_rogue_project\\managers\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|solutionrelative:managers\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|c:\\users\\shins\\documents\\github\\04-oop-console-project-hooni030\\the_rogue_project\\managers\\scenemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|solutionrelative:managers\\scenemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|c:\\users\\shins\\documents\\github\\04-oop-console-project-hooni030\\the_rogue_project\\scenes\\guidescene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|solutionrelative:scenes\\guidescene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|c:\\users\\shins\\documents\\github\\04-oop-console-project-hooni030\\the_rogue_project\\scenes\\stageselectscene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|solutionrelative:scenes\\stageselectscene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|c:\\users\\shins\\documents\\github\\04-oop-console-project-hooni030\\the_rogue_project\\utils\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|solutionrelative:utils\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|c:\\users\\shins\\documents\\github\\04-oop-console-project-hooni030\\the_rogue_project\\scenes\\logscene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|solutionrelative:scenes\\logscene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|c:\\users\\shins\\documents\\github\\04-oop-console-project-hooni030\\the_rogue_project\\utils\\textextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|solutionrelative:utils\\textextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|c:\\users\\shins\\documents\\github\\04-oop-console-project-hooni030\\the_rogue_project\\scenes\\mainmenuscene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|solutionrelative:scenes\\mainmenuscene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|c:\\users\\shins\\documents\\github\\04-oop-console-project-hooni030\\the_rogue_project\\utils\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|solutionrelative:utils\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|c:\\users\\shins\\documents\\github\\04-oop-console-project-hooni030\\the_rogue_project\\utils\\menulist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -37,18 +77,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|c:\\users\\shins\\documents\\github\\04-oop-console-project-hooni030\\the_rogue_project\\utils\\ractangle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|solutionrelative:utils\\ractangle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|c:\\users\\shins\\documents\\github\\04-oop-console-project-hooni030\\the_rogue_project\\scenes\\mainmenuscene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|solutionrelative:scenes\\mainmenuscene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|c:\\users\\shins\\documents\\github\\04-oop-console-project-hooni030\\the_rogue_project\\manaers\\inputmanger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|solutionrelative:manaers\\inputmanger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|c:\\users\\shins\\documents\\github\\04-oop-console-project-hooni030\\the_rogue_project\\manaers\\scenemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8857FD03-1839-A975-84BF-1CBF8A706E00}|The_Rogue_Project.csproj|solutionrelative:manaers\\scenemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -68,50 +96,122 @@
               "RelativeDocumentMoniker": "GameObjects\\PlayerCharacter.cs",
               "ToolTip": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\GameObjects\\PlayerCharacter.cs",
               "RelativeToolTip": "GameObjects\\PlayerCharacter.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAQwKcAAAAHAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIoAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-08T08:44:45.742Z",
+              "IsPinned": true,
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Tile.cs",
+              "DocumentMoniker": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Utils\\Tile.cs",
+              "RelativeDocumentMoniker": "Utils\\Tile.cs",
+              "ToolTip": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Utils\\Tile.cs",
+              "RelativeToolTip": "Utils\\Tile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAswBUAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-11T16:00:18.036Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Walls.cs",
+              "DocumentMoniker": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\GameObjects\\Walls.cs",
+              "RelativeDocumentMoniker": "GameObjects\\Walls.cs",
+              "ToolTip": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\GameObjects\\Walls.cs",
+              "RelativeToolTip": "GameObjects\\Walls.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-11T15:13:17.638Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ExpBall.cs",
+              "DocumentMoniker": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\GameObjects\\Item\\ExpBall.cs",
+              "RelativeDocumentMoniker": "GameObjects\\Item\\ExpBall.cs",
+              "ToolTip": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\GameObjects\\Item\\ExpBall.cs",
+              "RelativeToolTip": "GameObjects\\Item\\ExpBall.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAswAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-09T06:37:01.803Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Potion.cs",
+              "DocumentMoniker": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\GameObjects\\Item\\Potion.cs",
+              "RelativeDocumentMoniker": "GameObjects\\Item\\Potion.cs",
+              "ToolTip": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\GameObjects\\Item\\Potion.cs",
+              "RelativeToolTip": "GameObjects\\Item\\Potion.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-09T03:50:00.667Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "GameObject.cs",
+              "DocumentMoniker": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\GameObjects\\GameObject.cs",
+              "RelativeDocumentMoniker": "GameObjects\\GameObject.cs",
+              "ToolTip": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\GameObjects\\GameObject.cs",
+              "RelativeToolTip": "GameObjects\\GameObject.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAswAQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-11T15:14:47.245Z"
             }
           ]
         },
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 5,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Inventory.cs",
+              "DocumentMoniker": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Utils\\Inventory.cs",
+              "RelativeDocumentMoniker": "Utils\\Inventory.cs",
+              "ToolTip": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Utils\\Inventory.cs",
+              "RelativeToolTip": "Utils\\Inventory.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAywBsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-08T13:37:59.136Z",
+              "IsPinned": true
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Tile.cs",
-              "DocumentMoniker": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Utils\\Tile.cs",
-              "RelativeDocumentMoniker": "Utils\\Tile.cs",
-              "ToolTip": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Utils\\Tile.cs",
-              "RelativeToolTip": "Utils\\Tile.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAYAAAAAAAAAA==",
+              "DocumentIndex": 17,
+              "Title": "MenuList.cs",
+              "DocumentMoniker": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Utils\\MenuList.cs",
+              "RelativeDocumentMoniker": "Utils\\MenuList.cs",
+              "ToolTip": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Utils\\MenuList.cs",
+              "RelativeToolTip": "Utils\\MenuList.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAswG0AAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-09T01:03:08.766Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Inventory.cs",
-              "DocumentMoniker": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Utils\\Inventory.cs",
-              "RelativeDocumentMoniker": "Utils\\Inventory.cs",
-              "ToolTip": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Utils\\Inventory.cs",
-              "RelativeToolTip": "Utils\\Inventory.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAAA6wCcAAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T13:37:59.136Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T14:35:44.911Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
+              "Title": "ObservationProperty.cs",
+              "DocumentMoniker": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Utils\\ObservationProperty.cs",
+              "RelativeDocumentMoniker": "Utils\\ObservationProperty.cs",
+              "ToolTip": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Utils\\ObservationProperty.cs",
+              "RelativeToolTip": "Utils\\ObservationProperty.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAowCIAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-09T07:11:34.521Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
               "Title": "Ractangle.cs",
               "DocumentMoniker": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Utils\\Ractangle.cs",
               "RelativeDocumentMoniker": "Utils\\Ractangle.cs",
@@ -119,31 +219,17 @@
               "RelativeToolTip": "Utils\\Ractangle.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T14:35:27.128Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T14:35:27.128Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "MenuList.cs",
-              "DocumentMoniker": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Utils\\MenuList.cs",
-              "RelativeDocumentMoniker": "Utils\\MenuList.cs",
-              "ToolTip": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Utils\\MenuList.cs",
-              "RelativeToolTip": "Utils\\MenuList.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAG0AAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T14:35:44.911Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 2,
               "Title": "TextExtensions.cs",
               "DocumentMoniker": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Utils\\TextExtensions.cs",
               "RelativeDocumentMoniker": "Utils\\TextExtensions.cs",
               "ToolTip": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Utils\\TextExtensions.cs",
               "RelativeToolTip": "Utils\\TextExtensions.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAYwAsAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-09T02:32:20.092Z",
               "EditorCaption": ""
@@ -171,13 +257,13 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "StageScene.cs",
               "DocumentMoniker": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Scenes\\StageScene.cs",
               "RelativeDocumentMoniker": "Scenes\\StageScene.cs",
               "ToolTip": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Scenes\\StageScene.cs",
               "RelativeToolTip": "Scenes\\StageScene.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAvAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAswAMAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-08T15:28:27.844Z",
               "IsPinned": true,
@@ -185,76 +271,96 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 15,
               "Title": "MainMenuScene.cs",
               "DocumentMoniker": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Scenes\\MainMenuScene.cs",
               "RelativeDocumentMoniker": "Scenes\\MainMenuScene.cs",
               "ToolTip": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Scenes\\MainMenuScene.cs",
               "RelativeToolTip": "Scenes\\MainMenuScene.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAywAwAAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAABgAAAAAAAAAAAAqwCsAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-08T15:29:07.942Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 13,
               "Title": "StageSelectScene.cs",
               "DocumentMoniker": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Scenes\\StageSelectScene.cs",
               "RelativeDocumentMoniker": "Scenes\\StageSelectScene.cs",
               "ToolTip": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Scenes\\StageSelectScene.cs",
               "RelativeToolTip": "Scenes\\StageSelectScene.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAowAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAuwC8AAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-08T15:30:02.198Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "LogScene.cs",
+              "DocumentMoniker": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Scenes\\LogScene.cs",
+              "RelativeDocumentMoniker": "Scenes\\LogScene.cs",
+              "ToolTip": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Scenes\\LogScene.cs",
+              "RelativeToolTip": "Scenes\\LogScene.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAkAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-11T14:48:35.644Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "GuideScene.cs",
+              "DocumentMoniker": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Scenes\\GuideScene.cs",
+              "RelativeDocumentMoniker": "Scenes\\GuideScene.cs",
+              "ToolTip": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Scenes\\GuideScene.cs",
+              "RelativeToolTip": "Scenes\\GuideScene.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAYwBsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-11T14:48:34.729Z"
             }
           ]
         },
         {
           "DockedWidth": 297,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 10,
               "Title": "GameManager.cs",
-              "DocumentMoniker": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Manaers\\GameManager.cs",
-              "RelativeDocumentMoniker": "Manaers\\GameManager.cs",
-              "ToolTip": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Manaers\\GameManager.cs",
-              "RelativeToolTip": "Manaers\\GameManager.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAywCoAAAAbAAAAAAAAAA==",
+              "DocumentMoniker": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Managers\\GameManager.cs",
+              "RelativeDocumentMoniker": "Managers\\GameManager.cs",
+              "ToolTip": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Managers\\GameManager.cs",
+              "RelativeToolTip": "Managers\\GameManager.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAowCkAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T15:28:14.007Z",
+              "WhenOpened": "2026-01-08T15:28:14.007Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "InputManger.cs",
+              "DocumentMoniker": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Managers\\InputManger.cs",
+              "RelativeDocumentMoniker": "Managers\\InputManger.cs",
+              "ToolTip": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Managers\\InputManger.cs",
+              "RelativeToolTip": "Managers\\InputManger.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAswAUAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-09T01:01:50.2Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 11,
               "Title": "SceneManager.cs",
-              "DocumentMoniker": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Manaers\\SceneManager.cs",
-              "RelativeDocumentMoniker": "Manaers\\SceneManager.cs",
-              "ToolTip": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Manaers\\SceneManager.cs",
-              "RelativeToolTip": "Manaers\\SceneManager.cs",
+              "DocumentMoniker": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Managers\\SceneManager.cs",
+              "RelativeDocumentMoniker": "Managers\\SceneManager.cs",
+              "ToolTip": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Managers\\SceneManager.cs",
+              "RelativeToolTip": "Managers\\SceneManager.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T15:40:20.261Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "InputManger.cs",
-              "DocumentMoniker": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Manaers\\InputManger.cs",
-              "RelativeDocumentMoniker": "Manaers\\InputManger.cs",
-              "ToolTip": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\Manaers\\InputManger.cs",
-              "RelativeToolTip": "Manaers\\InputManger.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAswBcAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-09T01:01:50.2Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T15:40:20.261Z"
             }
           ]
         }

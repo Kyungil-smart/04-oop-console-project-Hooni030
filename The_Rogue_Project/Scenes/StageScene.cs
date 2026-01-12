@@ -5,12 +5,15 @@ public class StageScene : Scene
 {
     private int _stageLevel;
 
-    public static readonly int Field_Width = 25;
+    public static readonly int Field_Width = 12;
     public static readonly int Field_Height = 10;
 
     private Tile[,] _field = new Tile[Field_Height, Field_Width];
-    private Ractangle TimeUI = new Ractangle(0, 0, 18, 7);
+    private Ractangle TimeUI = new Ractangle(0, 0, 24, 7);
 
+    private Wall wall = new Wall();
+
+    private int _second = 0;
 
     private PlayerCharacter _player;
 
@@ -23,8 +26,7 @@ public class StageScene : Scene
     public void Init(PlayerCharacter player)
     {
         _player = player;
-
-        //GameManager.time = 0;
+        _player.wall = this.wall;
 
         for (int y = 0; y < _field.GetLength(0); y++)
         {
@@ -67,9 +69,17 @@ public class StageScene : Scene
     {
         PlayerStatInit();
 
+        GameManager.Second = 0;
+
         _player.Field = _field;
         _player.Position = new Vector(Field_Width/2, Field_Height/2);
         _field[_player.Position.Y, _player.Position.X].OnTileObject = _player;
+
+
+        for (int i = 0; i < _field.GetLength(1); i++)
+        {
+            _field[0, i].OnTileObject = wall;
+        }
     }
     public override void Update()
     {
@@ -77,8 +87,8 @@ public class StageScene : Scene
     }
     public override void Render()
     {
-        PrintField(19, 7);
-        PrintTime();
+        PrintField(24, 7);
+        TimeUI.Draw();
         _player.Render();
     }
     public override void Exit()
@@ -88,27 +98,28 @@ public class StageScene : Scene
     }
     private void PrintField(int pX, int pY)
     {
+
         for (int y = 0; y < _field.GetLength(0); y++)
         {
             Console.SetCursorPosition(pX, pY + y);
+
             for (int x = 0; x < _field.GetLength(1); x++)
             {
                 if (_field[y, x].OnTileObject == _player)
-                {
-                    _player.Symbol.Print(ConsoleColor.Black, ConsoleColor.Gray);
-                }
+                    _player.Symbol.Print(ConsoleColor.Black, ConsoleColor.DarkGray);
+                else if (_field[y, x].OnTileObject == wall)
+                    "🧱".Print(ConsoleColor.Black, ConsoleColor.DarkGray);
                 else
                     _field[y, x].Print();
             }
             Console.WriteLine();
         }
-    }
+        _second.ToString().Print();
 
-    private void PrintTime()
-    {
-        TimeUI.Draw();
-        Console.SetCursorPosition(2, 1);
-        //string Time = GameManager.time.ToString() + " / " + "300 s";
-        //Time.Print();
+        if (GameManager.Second > 25)
+        {
+            _second++;
+            GameManager.Second = 0;
+        }
     }
 }
