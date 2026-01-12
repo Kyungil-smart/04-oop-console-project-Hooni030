@@ -18,10 +18,6 @@ public class StageScene : Scene
     // 벽 객체 선언
     public static Wall wall = new Wall();
 
-    // 목표 시간 및 현재 진행된 시간 변수 선언
-    public static int purposeTime = 0;
-    private int _second = 0;
-
     // 플레이어 객체 선언
     private PlayerCharacter _player;
     // 승리 시간 및 생존 시간 변수 선언
@@ -45,8 +41,6 @@ public class StageScene : Scene
     private float _monsterMoveInterval;
     // 총알 속도 변수 선언
     private float _bulletSpeed;
-
-    private bool _isBackToMenu = false;
 
     // 스테이지 씬 생성자
     public StageScene(PlayerCharacter player, int level) => Init(player, level);
@@ -162,23 +156,23 @@ public class StageScene : Scene
             case 0:
                 _monaterHP = 4;
                 _monsterDamage = 1;
-                _monsterMoveInterval = 1.0f;
+                _monsterMoveInterval = 1.5f;
                 _spawnInterval = 3f;
-                purposeTime = 60;
+                _victoryTime = 60;
                 break;
             case 1:
                 _monaterHP = 6;
                 _monsterDamage = 2;
-                _monsterMoveInterval = 0.8f;
+                _monsterMoveInterval = 1.25f;
                 _spawnInterval = 2.25f;
-                purposeTime = 90;
+                _victoryTime = 90;
                 break;
             default:
                 _monaterHP = 7;
                 _monsterDamage = 3;
-                _monsterMoveInterval = 0.6f;
+                _monsterMoveInterval = 1.0f;
                 _spawnInterval = 1.5f;
-                purposeTime = 120;
+                _victoryTime = 120;
                 break;
         }
     }
@@ -245,6 +239,7 @@ public class StageScene : Scene
             monster.Position = new Vector(x, y);
             // 몬스터 리스트 추가
             _monsters.Add(monster);
+            _field[y, x].OnTileObject = monster;
             return;
         }
     }
@@ -299,23 +294,32 @@ public class StageScene : Scene
         // 바깥/벽은 발사 불가
         if (start.X < 1 || start.X > Field_Width - 2 || start.Y < 1 || start.Y > Field_Height - 2)
             return;
+
         // 시작 위치의 타일 객체 재선언
-        GameObject obj = _field[start.Y, start.X].OnTileObject;
+        GameObject getTile = _field[start.Y, start.X].OnTileObject;
 
         // 바로 앞이 벽이면 무시
-        if (obj is Wall) return;
+        if (getTile is Wall) return;
 
         // 바로 앞이 몬스터면 즉시 피격 처리
-        if (obj is Monster m)
+        if (getTile is Monster monster)
         {
-            m.TakeDamage(damage);
-            if (m.IsDead)
-                KillMonster(m);
+            monster.TakeDamage(damage);
+            if (monster.IsDead)
+                KillMonster(monster);
+            return;
+        }
+        if (getTile is ExpOrb orb)
+        {
+            Bullet b = new Bullet(start, direction, damage, _bulletSpeed);
+            b.OnObject = orb;
+            _field[start.Y, start.X].OnTileObject = b;
+            _bullets.Add(b);
             return;
         }
 
         // 빈칸일 때만 총알 생성
-        if (obj != null) return;
+        if (getTile != null) return;
 
         // 총알 객체 생성 및 필드에 배치
         Bullet bullet = new Bullet(start, direction, damage, _bulletSpeed);
@@ -375,23 +379,30 @@ public class StageScene : Scene
                     removed = true;
                     break;
                 }
-                if (hitBullet is ExpOrb orb)
+                ExpOrb onBullet = hitBullet as ExpOrb;
+
+                if (hitBullet  != null && onBullet == null)
                 {
                     RemoveBullet(bullet);
+                    break;
                 }
-                // 현재 위치에서 총알 제거
-                if (_field[bullet.Position.Y, bullet.Position.X].OnTileObject == bullet)
-                    _field[bullet.Position.Y, bullet.Position.X].OnTileObject = null;
+                RestoreBulletTile(bullet);
                 // 총알을 다음 위치로 이동
                 bullet.Position = nextPos;
+                bullet.OnObject = onBullet;
                 // 다음 위치에 총알 배치
                 _field[nextPos.Y, nextPos.X].OnTileObject = bullet;
             }
-            // 총알이 제거되었으면 다음 총알로 넘어감
-            if (removed)
-                continue;
         }
     }
+    // 총알이 경험치 볼 위에 있을 때 타일 복원 메서드
+    private void RestoreBulletTile(Bullet bullet)
+    {
+        if (_field[bullet.Position.Y, bullet.Position.X].OnTileObject == bullet)
+            _field[bullet.Position.Y, bullet.Position.X].OnTileObject = bullet.OnObject;
+        bullet.OnObject = null;
+    }
+
     // 총알 제거 메서드
     private void RemoveBullet(Bullet bullet)
     {
@@ -569,7 +580,7 @@ public class StageScene : Scene
         TimeUI.Draw(ConsoleColor.DarkCyan);
 
         int survivaltime = (int)_survivalTime;
-        int remainTime = purposeTime - survivaltime;
+        int remainTime = _victoryTime - survivaltime;
         if (remainTime < 0) remainTime = 0;
 
         // 난이도 출력

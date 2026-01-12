@@ -3,6 +3,8 @@
     public Vector Direction { get; private set; }
     public int Damage { get; private set; }
 
+    public GameObject OnObject { get; set; }
+
     public float FireInterval { get; private set; }
     public float FireTimer { get; set; }
 

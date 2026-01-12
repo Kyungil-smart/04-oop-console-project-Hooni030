@@ -282,13 +282,4 @@ public class PlayerCharacter : GameObject
 
         AttackPoint = AttackPoint + level / 3;
     }
-
-    // Esc 입력 시 메인메뉴로 돌아가는 선택 메뉴 출력
-    public void PrintEscapeMainMenu(int x, int y)
-    {
-    }
-    public void EscapeControl()
-    {
-        isEscape = !isEscape;
-    }
 }
