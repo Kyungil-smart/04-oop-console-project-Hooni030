@@ -80,6 +80,8 @@ public class StageScene : Scene
                 _field[y, x] = new Tile(new Vector(x, y));
             }
         }
+        // 벽 배치
+        SetWalls();
         // 몬스터, 총알, 경험치 볼 리스트 초기화
         _monsters.Clear();
         _bullets.Clear();
@@ -106,19 +108,6 @@ public class StageScene : Scene
     // 씬 업데이트 메서드
     public override void Update()
     {
-        // 메인 메뉴로 돌아가기 처리
-        if (_isBackToMenu)
-        {
-            MenuPopup();
-            return;
-        }
-        // Escape 키 입력 시 메인 메뉴로 돌아가기
-        if (InputManager.IsCorrectkey(ConsoleKey.Escape))
-        {
-            _isBackToMenu = true;
-            InputManager.ResetKey();
-            return;
-        }
         // 플레이어 업데이트
         _player.Update();
 
@@ -129,6 +118,7 @@ public class StageScene : Scene
         UpdateSpawn(deltaTime);
         UpdateBullet(deltaTime);
         UpdateMonster(deltaTime);
+
     }
 
     private void PlayerStatInit()
@@ -157,6 +147,9 @@ public class StageScene : Scene
                 _player.AttackPoint = 1;
                 break;
         }
+
+
+        _player.HP.Value = _player.MaxHp;
         // 총알 속도 설정
         _bulletSpeed = 0.2f;
     }
@@ -170,21 +163,21 @@ public class StageScene : Scene
                 _monaterHP = 4;
                 _monsterDamage = 1;
                 _monsterMoveInterval = 1.0f;
-                _spawnInterval = 1.2f;
+                _spawnInterval = 3f;
                 purposeTime = 60;
                 break;
             case 1:
                 _monaterHP = 6;
                 _monsterDamage = 2;
                 _monsterMoveInterval = 0.8f;
-                _spawnInterval = 1f;
+                _spawnInterval = 2.25f;
                 purposeTime = 90;
                 break;
             default:
                 _monaterHP = 7;
                 _monsterDamage = 3;
                 _monsterMoveInterval = 0.6f;
-                _spawnInterval = 0.8f;
+                _spawnInterval = 1.5f;
                 purposeTime = 120;
                 break;
         }
@@ -226,7 +219,7 @@ public class StageScene : Scene
                 // 하
                 case 1:
                     x = 6;
-                    y = Field_Height - 1;
+                    y = Field_Height - 2;
                     break;
                 // 좌
                 case 2:
@@ -235,7 +228,7 @@ public class StageScene : Scene
                     break;
                 // 우
                 case 3:
-                    x = Field_Width - 1;
+                    x = Field_Width - 2;
                     y = 5;
                     break;
                 default:
@@ -382,11 +375,9 @@ public class StageScene : Scene
                     removed = true;
                     break;
                 }
-                if ((hitBullet is ExpOrb))
+                if (hitBullet is ExpOrb orb)
                 {
                     RemoveBullet(bullet);
-                    removed = true;
-                    break;
                 }
                 // 현재 위치에서 총알 제거
                 if (_field[bullet.Position.Y, bullet.Position.X].OnTileObject == bullet)
@@ -401,32 +392,36 @@ public class StageScene : Scene
                 continue;
         }
     }
-
+    // 총알 제거 메서드
     private void RemoveBullet(Bullet bullet)
     {
+        // 현재 위치에서 총알 제거
         if (_field[bullet.Position.Y, bullet.Position.X].OnTileObject == bullet)
             _field[bullet.Position.Y, bullet.Position.X].OnTileObject = null;
-
+        // 총알 리스트에서 제거
         _bullets.Remove(bullet);
     }
-
+    // 몬스터 업데이트 메서드
     private void UpdateMonster(double time)
     {
+        // 몬스터 리스트를 순회하며 업데이트
         for (int i = _monsters.Count - 1; i >= 0; i--)
         {
+            // 현재 몬스터 가져오기
             Monster m = _monsters[i];
+            // 현재 몬스터의 다음 이동 시간 감소
             m.StepTimer -= (float)time;
 
+            // 다음 이동 시간이 아직 남아있으면 다음 몬스터로 넘어감
             if (m.StepTimer > 0f)
                 continue;
-
-            // 한 프레임에 여러 칸 움직이는 걸 방지하려면 while 대신 1회만 처리
+            // 다음 이동 시간 초기화
             m.StepTimer = m.StepInterval;
-
+            // 몬스터 이동 시도
             TryMonsterMove(m);
         }
     }
-
+    // 몬스터 이동 메서드
     private void TryMonsterMove(Monster monster)
     {
         // 플레이어와 몬스터의 위치 차이 계산
@@ -437,6 +432,8 @@ public class StageScene : Scene
         int moveY = (int)Math.Abs(directionToPlayer.Y);
         // 이동 방향 결정
         Vector moveDirection;
+
+        // 더 먼 쪽으로 이동
         if (moveX > moveY)
         {
             moveDirection = new Vector(Math.Sign(directionToPlayer.X), 0);
@@ -515,11 +512,16 @@ public class StageScene : Scene
     // 몬스터 처치 시 경험치 볼 드랍 메서드
     private void DropExpOrb(Vector pos)
     {
+        // 이미 타일에 오브가 있으면 드랍하지 않음
         if (_field[pos.Y, pos.X].OnTileObject != null)
             return;
-        ExpOrb orb = new ExpOrb(1, RemoveExpOrb);
-        orb.Position = pos; 
+        // 경험치 오브 객체 생성
 
+        ExpOrb orb = new ExpOrb(2 + _stageLevel, RemoveExpOrb);
+        // 경험치 오브 위치 설정
+        orb.Position = pos;
+
+        // 경험치 오브 리스트에 추가 및 필드에 배치
         _orbs.Add(orb);
         _field[pos.Y, pos.X].OnTileObject = orb;
     }
@@ -546,6 +548,14 @@ public class StageScene : Scene
                 // 현재 타일이 플레이어 객체인 경우 출력
                 if (_field[y, x].OnTileObject == _player)
                     _player.Symbol.Print(ConsoleColor.Red, ConsoleColor.DarkGray);
+                else if (_field[y, x].OnTileObject is Wall)
+                    wall.Symbol.Print(default, ConsoleColor.DarkGray);
+                else if (_field[y, x].OnTileObject is Monster monster)
+                    monster.Symbol.Print(ConsoleColor.Green, ConsoleColor.DarkGray);
+                else if (_field[y, x].OnTileObject is Bullet bullet)
+                    bullet.Symbol.Print(ConsoleColor.Yellow, ConsoleColor.DarkGray);
+                else if (_field[y, x].OnTileObject is ExpOrb orb)
+                    orb.Symbol.Print(ConsoleColor.Magenta, ConsoleColor.DarkGray);
                 else
                     _field[y, x].Print();
             }
@@ -571,12 +581,7 @@ public class StageScene : Scene
         "🕒목표 시간 ⏳생존 시간".Print(ConsoleColor.Cyan);
         // 목표 시간 및 생존 시간 출력
         Console.SetCursorPosition(x + 7, y + 4);
-        string timeString = $"{purposeTime} 초         {_second} 초";
+        string timeString = $"{_victoryTime} 초      {(int)_survivalTime} 초";
         timeString.Print(ConsoleColor.Blue);
-    }
-
-
-    private void MenuPopup()
-    {
     }
 }
