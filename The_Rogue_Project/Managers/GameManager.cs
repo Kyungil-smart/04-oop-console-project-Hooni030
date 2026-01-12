@@ -17,29 +17,29 @@ public class GameManager
     // 스테이지에서 관리할 플레이어 객체 선언
     private PlayerCharacter _player;
 
-    public static int Second = 0;
+    Stopwatch _frame = Stopwatch.StartNew();
+    const int _targetFrame = 25;
+    const int targetFrameMs = 1000 / _targetFrame;
 
     // 실제 프로그램 구동 메서드
     public void Run()
     {
         // 초기화 함수 사용
         Init();
-
-        Stopwatch sw = Stopwatch.StartNew();
-        const int Frame = 25;
-        const int FrameMs = 1000 / Frame;
+        // 시간 측정을 위한 스톱워치 시작
+        Stopwatch watch = Stopwatch.StartNew();
 
         // 게임오버가 참일 때 프로그램 종료
         while (!isGameOver)
         {
-            //Console.SetCursorPosition(0, 0);
-            long framestart = sw.ElapsedMilliseconds;
+            double frameStart = watch.ElapsedMilliseconds;
 
+            Time.Update();
             // 다음 프레임 출력
             SceneManager.Render();
 
             // 콘솔 입력 받기
-            InputManager.GetUserInput();
+            InputManager.Poll();
 
             // 프로그램 중간에 L 키를 누르면 디버그(로그) 화면으로 진입
             if (InputManager.IsCorrectkey(ConsoleKey.L))
@@ -48,13 +48,14 @@ public class GameManager
             // 상태 업데이트
             SceneManager.Update();
 
-            long frametime = sw.ElapsedMilliseconds - framestart;
-            int sleep = FrameMs / (int)frametime;
+            double frameTime = watch.ElapsedMilliseconds - frameStart;
+            int sleep = targetFrameMs - (int)frameTime;
             if (sleep > 0)
             {
                 Thread.Sleep(sleep);
-                Second++;
+
             }
+
         }
     }
 
@@ -64,10 +65,9 @@ public class GameManager
         // 기본 동작을 위해 false로 초기화
         isGameOver = false;
 
+        // 콘솔 창 크기 및 버퍼 크기 설정
         Console.SetWindowSize(100, 50);
         Console.SetBufferSize(100, 50);
-
-        Console.SetWindowSize(100, 50);
 
         // 특수문자(이모지 등) 사용을 위해 인코딩 변경
         Console.OutputEncoding = System.Text.Encoding.UTF8;
@@ -75,7 +75,11 @@ public class GameManager
         Console.CursorVisible = false;
 
         // 씬이 변경될 때 마다 입력 키 None으로 초기화
-        SceneManager.OnSceneChange += () => Console.Clear();
+        SceneManager.OnSceneChange += () =>
+        {
+            Console.Clear();
+            Console.SetCursorPosition(0, 0);
+        };
         SceneManager.OnSceneChange += InputManager.ResetKey;
 
         // 메인메뉴, 스테이지 선택, 도움말, 크레딧 씬 추가

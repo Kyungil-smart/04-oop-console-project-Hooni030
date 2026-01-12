@@ -103,7 +103,7 @@
         if (_currentMenuIndex >= _menus.Count)
             _currentMenuIndex = _menus.Count - 1;
 
-        if (_menus[_currentMenuIndex].action == null)
+        if (_menus[_currentMenuIndex].action is null)
             _currentMenuIndex++;
     }
 

@@ -13,7 +13,8 @@
         // 공격
         ConsoleKey.Spacebar,
 
-        ConsoleKey.I, // 인벤토리
+        // 메인 메뉴 복귀 화면 출력
+        ConsoleKey.Escape, 
 
         ConsoleKey.Enter, // 선택
 
@@ -23,7 +24,7 @@
     public static bool IsCorrectkey(ConsoleKey input)
         => _current == input;
 
-    public static void GetUserInput()
+    public static void Poll()
     {
         while (Console.KeyAvailable)
         {
@@ -39,9 +40,9 @@
             }
         }
     }
+
     public static void ResetKey()
         => _current = ConsoleKey.None;
-
     public static ConsoleKey UsedKey()
     {
         ConsoleKey key = _current;

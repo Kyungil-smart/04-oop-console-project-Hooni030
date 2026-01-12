@@ -1,52 +1,74 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 public class PlayerCharacter : GameObject
 {
+    // 플레이어 레벨, 경험치, 체력 변동 시 메서드를 불러올 수 있도록 선언
     public ObservableProperty<int> Level;
     public ObservableProperty<float> Exp;
     public ObservableProperty<float> HP;
+
+    // 스테이지 필드 저장할 타일 배열 변수 선언
     public Tile[,] Field { get; set; }
 
-    private Inventory _inventory;
-    public bool IsActiveControl { get; private set; }
+    // 플레이어 인스턴스 생성시 초기화
     public PlayerCharacter() => Init();
+    public static Vector _currentPlayerLoc = new Vector(StageScene.Field_Width / 2, StageScene.Field_Height / 2);
 
-    private int stageWidth = StageScene.Field_Width;
-    private int stageHeight = StageScene.Field_Height;
-
+    // 스텟 UI 창 및 크기 선언
+    private Ractangle StatUIWindow;
     private const int Stat_UI_Width = 27;
     private const int Stat_UI_Height = 11;
-    private Ractangle StatUIWindow;
 
+    // 레벨 UI 창 및 크기 선언
+    private Ractangle LevelUIWindow;
     private const int Level_UI_Width = 26;
     private const int Level_UI_Height = 7;
-    private Ractangle LevelUIWindow;
 
+    // 
+    private MenuList _escapeStageMenu = new MenuList();
+    private bool isEscape = true;
+
+    // 플레이어 레벨 및 경험치 관련 선언
     private string LevelIcon = "⭐";
     private int MaxExp;
     private float _expPercent;
-
     private string ExpIcon = "✨";
     private string ExpBar = "🟩";
+    // 플레이어 체력 관련 선언
     public int MaxHp { get; set; }
     private float _hpPercent;
     private string _hpBar = "🟥";
 
-    public int BaseDamage { get; set; }
-    private int _damage;
-    private string _damageIcon = "🗡️";
-
+    // 플레이어 공격 관련 선언
+    public int AttackPoint { get; set; }
+    private string _attackIcon = "🗡️";
+    // 플레이어가 보고 있는 방향 변수
+    public Vector FaceVector { get; private set; } = Vector.Right;
+    public event Action<Vector, int> OnShoot;
+    // 플레이어 총알 발사 쿨타임 선언
+    private const float ShootInterval = 0.20f;
+    private double _shootCooldown;
+    // 플레이어 쉴드 관련 선언
     public int MaxShield { get; set; }
     public int CurrentShield { get; set; }
     private string _ShieldBar = "🛡";
 
-
+    // 플레이어 객체 초기화 메서드
     private void Init()
     {
-        Symbol = "⭐";
-        IsActiveControl = true;
+        Symbol = "🌟";
 
-        _inventory = new Inventory(this);
+        StatInit();
+
+        _escapeStageMenu.Add("메인 메뉴로 돌아가기", null);
+        _escapeStageMenu.Add("예", () => SceneManager.ChangeScene("MainMenu"));
+        _escapeStageMenu.Add("아니요", () => isEscape = !isEscape);
+    }
+
+    public void StatInit()
+    {
+        MaxExp = 4;
 
         StatUIWindow = new Ractangle(0, 7, Stat_UI_Width, Stat_UI_Height);
         LevelUIWindow = new Ractangle(27, 0, Level_UI_Width, Level_UI_Height);
@@ -57,85 +79,87 @@ public class PlayerCharacter : GameObject
 
         Exp.AddListener(NextExp);
         Level.AddListener(NextLevel);
-        HP.AddListener(SetHP);
+        HP.AddListener(null);
 
         HP.Value = MaxHp;
-    }
-
-    public void StatInit()
-    {
-        MaxExp = 4;
-
-        HP.Value = MaxHp;
-
-        _damage = BaseDamage;
     }
 
     public void Update()
     {
-        ConsoleKey key = InputManager.UsedKey();
-        if (key == ConsoleKey.None) return;
-
-        switch (key)
+        if(_shootCooldown > 0d)
         {
-            case ConsoleKey.I:
-                HandleControl();
-                break;
+            _shootCooldown -= Time.DeltaTime;
+            if (_shootCooldown < 0d) _shootCooldown = 0d;
+        }
+        if (InputManager.IsCorrectkey(ConsoleKey.Spacebar))
+        {
+            if (_shootCooldown <= 0f)
+            {
+                OnShoot?.Invoke(FaceVector, AttackPoint);
+                _shootCooldown = ShootInterval;
+            }
+        }
 
-            case ConsoleKey.UpArrow:
-                //Symbol = '▲';
-                Move(Vector.Up);
-                _inventory.SelectUp();
-                break;
-
-            case ConsoleKey.DownArrow:
-                //Symbol = '▼';
-                Move(Vector.Down);
-                _inventory.SelectDown();
-                break;
-
-            case ConsoleKey.LeftArrow:
-                //Symbol = '◀';
-                Move(Vector.Left);
-                break;
-
-            case ConsoleKey.RightArrow:
-                //Symbol = '▶';
-                Move(Vector.Right);
-                break;
-
-            case ConsoleKey.Enter:
-                _inventory.Select();
-                break;
+        if (InputManager.IsCorrectkey(ConsoleKey.UpArrow))
+        {
+            FaceVector = Vector.Up;
+            Move(Vector.Up);
+        }
+        if (InputManager.IsCorrectkey(ConsoleKey.DownArrow))
+        {
+            FaceVector = Vector.Down;
+            Move(Vector.Down);
+        }
+        if (InputManager.IsCorrectkey(ConsoleKey.LeftArrow))
+        {
+            FaceVector = Vector.Left;
+            Move(Vector.Left);
+        }
+        if (InputManager.IsCorrectkey(ConsoleKey.RightArrow))
+        {
+            FaceVector = Vector.Right;
+            Move(Vector.Right);
+        }
+        if (InputManager.IsCorrectkey(ConsoleKey.Enter))
+        {
         }
     }
 
-    public void HandleControl()
+    private void FireBullet()
     {
-        _inventory._isInventoryActive = !_inventory._isInventoryActive;
-        IsActiveControl = !_inventory._isInventoryActive;
+       bullet.FiredBullet++;
+
+        if (!IsFireBullet() || bullet.FiredBullet >= 5)
+              return;
+        Vector bV = Position + _bulletVector;
+        Field[bV.Y, bV.X].OnTileObject = bullet;
+    }
+    public bool IsFireBullet()
+    {
+        if (bullet.FiredBullet <= bullet.MaxAmount)
+            return true;
+        else
+            return false;
     }
 
     private void Move(Vector direction)
     {
-        if (Field == null || !IsActiveControl) return;
+        if (Field == null) return;
+
 
         Vector current = Position;
         Vector nextPos = current + direction;
 
-
-
-        // 1. 맵 바깥은 아닌지?
+        // 1. 맵 바깥 여부 체크
         if (nextPos.X < 1 || nextPos.X > StageScene.Field_Width - 2 ||
             nextPos.Y < 1 || nextPos.Y > StageScene.Field_Height - 2)
             return;
 
-        // 2. 벽인지?
-        if (Field[nextPos.Y, nextPos.X].OnTileObject is Wall)
-            return;
-
         GameObject nextTileObject = Field[nextPos.Y, nextPos.X].OnTileObject;
 
+        // 이동불가 오브젝트 체크
+        if (nextTileObject is Wall || nextTileObject is Monster || nextTileObject is Bullet)
+            return;
 
         if (nextTileObject != null)
         {
@@ -151,20 +175,41 @@ public class PlayerCharacter : GameObject
         Position = nextPos;
     }
 
+    public void TakeDamage(int damage)
+    {
+        if (damage <= 0) return;
+
+        // 방어막 먼저 소모
+        if (CurrentShield > 0)
+        {
+            int shieldRemain = CurrentShield - damage;
+            if (shieldRemain >= 0)
+            {
+                CurrentShield = shieldRemain;
+                return;
+            }
+
+            CurrentShield = 0;
+            damage = -shieldRemain; // 남은 데미지
+        }
+
+        HP.Value -= damage;
+        if (HP.Value <= 0)
+        {
+            HP.Value = 0;
+            GameManager.isGameOver = true;
+        }
+    }
+
     public void Render()
     {
         StatUIWindow.Draw(ConsoleColor.Yellow);
         LevelUIWindow.Draw(ConsoleColor.DarkYellow);
-        _inventory.Render();
-        RenderPlayerUI();
+        RenderCharacterUI();
     }
 
-    public void AddItem(Item item)
-    {
-        _inventory.Add(item);
-    }
-
-    public void RenderPlayerUI()
+    // 캐릭터UI 출력 메서드
+    public void RenderCharacterUI()
     {
         RenderHP(2, 8);
         RenderShield(2, 11);
@@ -172,22 +217,25 @@ public class PlayerCharacter : GameObject
         RenderLevel(30, 1);
     }
 
+    // 캐릭터 체력 UI 출력 메서드
     public void RenderHP(int x, int y)
     {
-        string hpUI = "체력 : " + HP.Value.ToString() + " / " + MaxHp.ToString();
+        string hpUI = $"체력 : {HP.Value} / {MaxHp}";
+
         Console.SetCursorPosition(x, y);
         hpUI.Print();
-        Console.SetCursorPosition(x, y + 1);
 
+        Console.SetCursorPosition(x, y + 1);
         _hpPercent = HP.Value / MaxHp * 10;
         for (int i = 0; i < _hpPercent; i++)
         {
             _hpBar.Print();
         }
     }
+    // 캐릭터 쉴드 UI 출력 메서드
     public void RenderShield(int x, int y)
     {
-        string shieldUI = "방어막 : " + CurrentShield.ToString() + " / " + MaxShield.ToString();
+        string shieldUI = $"방어막 : {CurrentShield} / {MaxShield}";
         Console.SetCursorPosition(x, y);
         shieldUI.Print();
         Console.SetCursorPosition(x, y + 1);
@@ -196,30 +244,28 @@ public class PlayerCharacter : GameObject
             _ShieldBar.Print();
         }
     }
+    // 캐릭터 공격력 UI 출력 메서드
     public void RenderDamage(int x, int y)
     {
         Console.SetCursorPosition(x, y);
-        string damageUI = "공격력 : " + _damage.ToString();
+        string damageUI = $"공격력 : {AttackPoint}";
         damageUI.Print();
 
         Console.SetCursorPosition(x, y+1);
-        for(int i = 0; i< _damage; i++)
+        for(int i = 0; i< AttackPoint; i++)
         {
-            _damageIcon.Print();
+            _attackIcon.Print();
         }
     }
-
-    public void SetHP(float HP)
-    {
-    }
+    // 캐릭터 레벨, Exp UI 출력 메서드
     public void RenderLevel(int x, int y)
     {
-        string levelUI = LevelIcon + " Level : " + Level.Value.ToString();
+        string levelUI = $"{LevelIcon} Level : {Level.Value}";
 
         Console.SetCursorPosition(x, y);
         levelUI.Print();
 
-        string expUI = ExpIcon + " Exp" + " " + Exp.Value.ToString() + " / " + MaxExp.ToString();
+        string expUI = $"{ExpIcon} Exp {Exp.Value} / {MaxExp}";
         Console.SetCursorPosition(x, y + 2);
         expUI.Print();
 
@@ -230,6 +276,7 @@ public class PlayerCharacter : GameObject
         }
     }
 
+    // 캐릭터의 경험치가 변동되면 실행되는 메서드
     public void NextExp(float exp)
     {
         _expPercent = Exp.Value / MaxExp * 10;
@@ -241,6 +288,7 @@ public class PlayerCharacter : GameObject
         }
     }
 
+    // 캐릭터의 레벨이 오를 때 실행되는 메서드
     public void NextLevel(int level)
     {
         MaxExp = MaxExp/2 * level / 3 + 3;
@@ -250,17 +298,15 @@ public class PlayerCharacter : GameObject
         else
             HP.Value = MaxHp;
 
-        _damage = BaseDamage + level / 3;
+        AttackPoint = AttackPoint + level / 3;
     }
 
-
-    //public void SetHealthGauge(int health)
-    //{
-
-    //}
-
-    //public void Heal(int value)
-    //{
-    //    //HP.Value += value;
-    //}
+    // Esc 입력 시 메인메뉴로 돌아가는 선택 메뉴 출력
+    public void PrintEscapeMainMenu(int x, int y)
+    {
+    }
+    public void EscapeControl()
+    {
+        isEscape = !isEscape;
+    }
 }

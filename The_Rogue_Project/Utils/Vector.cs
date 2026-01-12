@@ -14,4 +14,6 @@
     public static Vector Right => new Vector(1, 0);
     public static Vector operator +(Vector a, Vector b)
         => new Vector(a.X + b.X, a.Y + b.Y);
+    public static Vector operator -(Vector a, Vector b)
+        => new Vector(a.X - b.X, a.Y - b.Y);
 }
