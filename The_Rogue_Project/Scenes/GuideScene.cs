@@ -4,10 +4,17 @@
 
     private readonly string[] guide =
     {
+        "게임명 : The Logue",
+        "",
+        "장르 : 로그라이크",
+        "",
+        "게임 목표 : ",
+        "몬스터들을 처치하며 일정시간 버텨내면 승리!",
+        "",
         "조작법",
         "이동 : 방향키",
-        "인벤토리 : I",
-        "일시정지 : Space Bar",
+        "공격 : 스페이스 바",
+        "",
         "메인 메뉴 : Escape"
     };
 
@@ -28,14 +35,12 @@
     }
     public override void Render()
     {
-        Console.SetCursorPosition(13, 2);
-        guide[0].Print(ConsoleColor.DarkCyan);
-        for (int i = 1; i < guide.Length; i++)
+        for (int i = 0; i < guide.Length; i++)
         {
-            Console.SetCursorPosition(9, 3 + i);
+            Console.SetCursorPosition(15, 4 + i);
             guide[i].Print();
         }
-        _guideMenu.Render(10, 9);
+        _guideMenu.Render(23, 18);
     }
     public override void Exit()
     {
