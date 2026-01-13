@@ -602,7 +602,7 @@ public class StageScene : Scene
     public void UpdateTime(double deltaTime)
     {
         // 생존 시간 증가
-        _survivalTime += deltaTime * 10;
+        _survivalTime += deltaTime;
         // 승리 시간 도달 시 승리 씬으로 전환
         if ( _survivalTime >= _victoryTime)
         {
