@@ -68,8 +68,6 @@ public class PlayerCharacter : GameObject
 
     public void StatInit()
     {
-        MaxExp = 4;
-
         StatUIWindow = new Ractangle(0, 7, Stat_UI_Width, Stat_UI_Height);
         LevelUIWindow = new Ractangle(27, 0, Level_UI_Width, Level_UI_Height);
 
@@ -80,6 +78,18 @@ public class PlayerCharacter : GameObject
         Exp.AddListener(NextExp);
         Level.AddListener(NextLevel);
         HP.AddListener(null);
+    }
+    public void StatClear()
+    {
+        HP.Value = 0;
+        _hpPercent = 0;
+        Level.Value = 1;
+        Exp.Value = 0;
+        _expPercent = 0;
+
+        HP.ClearListener();
+        Exp.ClearListener();
+        Level.ClearListener();
     }
 
     public void Update()
@@ -118,8 +128,9 @@ public class PlayerCharacter : GameObject
             FaceVector = Vector.Right;
             Move(Vector.Right);
         }
-        if (InputManager.IsCorrectkey(ConsoleKey.Enter))
+        if (InputManager.IsCorrectkey(ConsoleKey.Escape))
         {
+            SceneManager.ChangeScene("MainMenu");
         }
     }
 
@@ -179,7 +190,7 @@ public class PlayerCharacter : GameObject
         if (HP.Value <= 0)
         {
             HP.Value = 0;
-            GameManager.isGameOver = true;
+            SceneManager.ChangeScene("Dead");
         }
     }
 
