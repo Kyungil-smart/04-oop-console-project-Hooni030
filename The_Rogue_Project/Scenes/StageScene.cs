@@ -136,7 +136,8 @@ public class StageScene : Scene
     {
         // 플레이어 총알 발사 이벤트 핸들러 해제
         _player.OnShoot -= HandleShoot;
-
+        // 플레이어 스탯 초기화
+        _player.StatClear();
         // 플레이어를 필드에서 제거
         _field[_player.Position.Y, _player.Position.X].OnTileObject = null;
         _player.Field = null;
@@ -208,7 +209,7 @@ public class StageScene : Scene
         {
             case 0:
                 _monaterHP = 4;
-                _monsterDamage = 1;
+                _monsterDamage = 10;
                 _monsterMoveInterval = 2.5f;
                 _spawnInterval = 3f;
                 _victoryTime = 60;
@@ -611,10 +612,10 @@ public class StageScene : Scene
     {
         // 시간 UI 출력
         TimeUI.Draw(ConsoleColor.DarkCyan);
-
+        string[] level = { "쉬움", "보통", "어려움" };
         // 난이도 출력
         Console.SetCursorPosition(x + 3, y + 1);
-        $"난이도 : {_stageLevel + 1}단계".Print(ConsoleColor.White);
+        $"난이도 : {level[_stageLevel]} ".Print(ConsoleColor.White);
 
         // 시간 출력
         Console.SetCursorPosition(x + 2, y + 3);
