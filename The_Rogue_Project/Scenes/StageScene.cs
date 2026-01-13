@@ -29,7 +29,7 @@ public class StageScene : Scene
     private readonly List<Bullet> _bullets = new List<Bullet>();
     private readonly List<ExpOrb> _orbs = new List<ExpOrb>();
 
-    // 난이도에 따른 몬스터 랜덤 객체 선언
+    // 난이도에 따른 랜덤 변수 선언
     private Random _random = new Random();
     // 몬스터 스폰 타이머 및 스폰 간격 변수 선언
     private float _spawnTimer;
@@ -39,6 +39,7 @@ public class StageScene : Scene
     private int _monaterHP;
     private int _monsterDamage;
     private float _monsterMoveInterval;
+    private int _maxMonsterCount;
     // 총알 속도 변수 선언
     private float _bulletSpeed;
 
@@ -81,8 +82,12 @@ public class StageScene : Scene
         _bullets.Clear();
         _orbs.Clear();
 
+        // 몬스터 스폰 타이머 및 간격 초기화
         _spawnTimer = 0f;
         _spawnInterval = 0f;
+
+        // 생존 시간 초기화
+        _survivalTime = 0d;
 
         // 플레이어 스탯 초기화
         PlayerStatInit();
@@ -105,14 +110,62 @@ public class StageScene : Scene
         // 플레이어 업데이트
         _player.Update();
 
+        // 델타 타임 계산
         double deltaTime = Time.DeltaTime;
 
-        _survivalTime += deltaTime;
-
+        // 몬스터 스폰, 몬스터 ,총알 업데이트
         UpdateSpawn(deltaTime);
-        UpdateBullet(deltaTime);
         UpdateMonster(deltaTime);
+        UpdateBullet(deltaTime);
 
+        // 시간 UI 업데이트
+        UpdateTime(deltaTime);
+    }
+    // 씬 렌더링 메서드
+    public override void Render()
+    {
+        // 필드 출력
+        PrintField(mapPosX, mapPosY);
+        // 플레이어 출력
+        _player.Render();
+        // 시간 UI 출력
+        PrintTimeUI(0, 0);
+    }
+    // 씬 종료 시 호출되는 메서드
+    public override void Exit()
+    {
+        // 플레이어 총알 발사 이벤트 핸들러 해제
+        _player.OnShoot -= HandleShoot;
+
+        // 플레이어를 필드에서 제거
+        _field[_player.Position.Y, _player.Position.X].OnTileObject = null;
+        _player.Field = null;
+        // 몬스터, 총알, 경험치 볼 리스트 초기화
+        _monsters.Clear();
+        _bullets.Clear();
+        _orbs.Clear();
+    }
+
+    // 벽 생성 메서드
+    private void SetWalls()
+    {
+        // 필드 테두리 가로 세로 크기 선언
+        int height = _field.GetLength(0);
+        int width = _field.GetLength(1);
+
+        // 테두리 벽 배치
+        for (int x = 0; x < width; x++)
+        {
+            if (x == 6) continue;
+            _field[0, x].OnTileObject = wall;
+            _field[height - 1, x].OnTileObject = wall;
+        }
+        for (int y = 0; y < height; y++)
+        {
+            if (y == 5) continue;
+            _field[y, 0].OnTileObject = wall;
+            _field[y, width - 1].OnTileObject = wall;
+        }
     }
 
     private void PlayerStatInit()
@@ -142,7 +195,7 @@ public class StageScene : Scene
                 break;
         }
 
-
+        // 플레이어 체력 초기화
         _player.HP.Value = _player.MaxHp;
         // 총알 속도 설정
         _bulletSpeed = 0.2f;
@@ -156,23 +209,26 @@ public class StageScene : Scene
             case 0:
                 _monaterHP = 4;
                 _monsterDamage = 1;
-                _monsterMoveInterval = 1.5f;
+                _monsterMoveInterval = 2.5f;
                 _spawnInterval = 3f;
                 _victoryTime = 60;
+                _maxMonsterCount = 7;
                 break;
             case 1:
                 _monaterHP = 6;
                 _monsterDamage = 2;
-                _monsterMoveInterval = 1.25f;
-                _spawnInterval = 2.25f;
+                _monsterMoveInterval = 2f;
+                _spawnInterval = 2.5f;
                 _victoryTime = 90;
+                _maxMonsterCount = 9;
                 break;
             default:
                 _monaterHP = 7;
                 _monsterDamage = 3;
-                _monsterMoveInterval = 1.0f;
-                _spawnInterval = 1.5f;
+                _monsterMoveInterval = 1.75f;
+                _spawnInterval = 2f;
                 _victoryTime = 120;
+                _maxMonsterCount = 11;
                 break;
         }
     }
@@ -187,7 +243,10 @@ public class StageScene : Scene
         {
             // 스폰 타이머에서 스폰 간격만큼 감소
             _spawnTimer -= _spawnInterval;
-            SpawnMonster();
+            if (_monsters.Count < _maxMonsterCount)
+            {
+                SpawnMonster();
+            }
         }
     }
     // 몬스터 스폰 메서드
@@ -242,47 +301,6 @@ public class StageScene : Scene
             _field[y, x].OnTileObject = monster;
             return;
         }
-    }
-    // 벽 생성 메서드
-    private void SetWalls()
-    {
-        // 필드 테두리 가로 세로 크기 선언
-        int height = _field.GetLength(0);
-        int width = _field.GetLength(1);
-
-        // 테두리 벽 배치
-        for (int x = 0; x < width; x++)
-        {
-            if (x == 6) continue;
-            _field[0, x].OnTileObject = wall;
-            _field[height - 1, x].OnTileObject = wall;
-        }
-        for(int y = 0; y < height; y++)
-        {
-            if (y == 5) continue;
-            _field[y, 0].OnTileObject = wall;
-            _field[y, width - 1].OnTileObject = wall;
-        }
-    }
-
-    // 씬 렌더링 메서드
-    public override void Render()
-    {
-        // 필드 출력
-        PrintField(mapPosX, mapPosY);
-        // 플레이어 출력
-        _player.Render();
-        // 시간 UI 출력
-        PrintTimeUI(0, 0);
-    }
-    // 씬 종료 시 호출되는 메서드
-    public override void Exit()
-    {
-        // 플레이어 총알 발사 이벤트 핸들러 해제
-        _player.OnShoot -= HandleShoot;
-        // 플레이어를 필드에서 제거
-        _field[_player.Position.Y, _player.Position.X].OnTileObject = null;
-        _player.Field = null;
     }
     // 플레이어 총알 발사 이벤트 핸들러
     private void HandleShoot(Vector direction, int damage)
@@ -526,9 +544,13 @@ public class StageScene : Scene
         // 이미 타일에 오브가 있으면 드랍하지 않음
         if (_field[pos.Y, pos.X].OnTileObject != null)
             return;
-        // 경험치 오브 객체 생성
+        // 드랍할 경험치 양 계산
+        // 랜덤으로 난이도에 비례한 경험치 드랍
+        int exp = _random.Next(1, _stageLevel + 3);
 
-        ExpOrb orb = new ExpOrb(2 + _stageLevel, RemoveExpOrb);
+        // 경험치 오브 객체 생성
+        ExpOrb orb = new ExpOrb(exp, RemoveExpOrb);
+
         // 경험치 오브 위치 설정
         orb.Position = pos;
 
@@ -573,15 +595,22 @@ public class StageScene : Scene
             Console.WriteLine();
         }
     }
+    public void UpdateTime(double deltaTime)
+    {
+        // 생존 시간 증가
+        _survivalTime += deltaTime;
+
+        if ( _survivalTime >= _victoryTime)
+        {
+            SceneManager.ChangeScene("Victory");
+            _survivalTime = 0;
+        }
+    }
     // 시간 UI 출력 메서드
     private void PrintTimeUI(int x, int y)
     {
         // 시간 UI 출력
         TimeUI.Draw(ConsoleColor.DarkCyan);
-
-        int survivaltime = (int)_survivalTime;
-        int remainTime = _victoryTime - survivaltime;
-        if (remainTime < 0) remainTime = 0;
 
         // 난이도 출력
         Console.SetCursorPosition(x + 3, y + 1);

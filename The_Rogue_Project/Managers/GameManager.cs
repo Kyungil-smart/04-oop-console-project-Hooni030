@@ -82,11 +82,13 @@ public class GameManager
         };
         SceneManager.OnSceneChange += InputManager.ResetKey;
 
-        // 메인메뉴, 스테이지 선택, 도움말, 크레딧 씬 추가
+        // 메인메뉴, 가이드, 크레딧, 스테이지 선택, 승리, 엔딩 씬 추가
         SceneManager.AddScene("MainMenu", new MainMenuScene());
         SceneManager.AddScene("Guide", new GuideScene());
         SceneManager.AddScene("Credit", new CreditScene());
         SceneManager.AddScene("StageSelect", new StageSelectScene());
+        SceneManager.AddScene("Victory", new VictoryScene());
+        SceneManager.AddScene("End", new GameEndingScene());
 
         // 플레이어 객체 할당
         _player = new PlayerCharacter();
