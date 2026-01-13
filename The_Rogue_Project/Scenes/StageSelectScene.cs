@@ -35,10 +35,10 @@
     }
     public override void Render()
     {
-        Console.SetCursorPosition(17, 3);
-        "난이도 선택".Print(ConsoleColor.DarkMagenta);
+        Console.SetCursorPosition(22, 6);
+        "난이도 선택".Print(ConsoleColor.DarkRed);
 
-        _stageList.Render(15, 5);
+        _stageList.Render(20, 9);
     }
     public override void Exit()
     {

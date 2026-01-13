@@ -37,10 +37,10 @@
     }
     public override void Render()
     {
-        Console.SetCursorPosition(0, 2);
+        Console.SetCursorPosition(0, 4);
         GameManager.GameTitle.Print(ConsoleColor.Magenta);
 
-        _mainMenu.Render(30, 15);
+        _mainMenu.Render(28, 15);
     }
     public override void Exit()
     {

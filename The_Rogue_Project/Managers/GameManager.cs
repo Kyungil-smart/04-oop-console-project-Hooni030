@@ -88,7 +88,7 @@ public class GameManager
         SceneManager.AddScene("Credit", new CreditScene());
         SceneManager.AddScene("StageSelect", new StageSelectScene());
         SceneManager.AddScene("Victory", new VictoryScene());
-        SceneManager.AddScene("End", new GameEndingScene());
+        SceneManager.AddScene("Dead", new DeadScene());
 
         // 플레이어 객체 할당
         _player = new PlayerCharacter();
