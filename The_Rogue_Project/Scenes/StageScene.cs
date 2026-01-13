@@ -209,7 +209,7 @@ public class StageScene : Scene
         {
             case 0:
                 _monaterHP = 4;
-                _monsterDamage = 10;
+                _monsterDamage = 2;
                 _monsterMoveInterval = 2.5f;
                 _spawnInterval = 3f;
                 _victoryTime = 60;
@@ -547,7 +547,7 @@ public class StageScene : Scene
             return;
         // 드랍할 경험치 양 계산
         // 랜덤으로 난이도에 비례한 경험치 드랍
-        int exp = _random.Next(1, _stageLevel + 3);
+        int exp = _random.Next(2, 2 + _stageLevel + 3);
 
         // 경험치 오브 객체 생성
         ExpOrb orb = new ExpOrb(exp, RemoveExpOrb);
@@ -599,7 +599,7 @@ public class StageScene : Scene
     public void UpdateTime(double deltaTime)
     {
         // 생존 시간 증가
-        _survivalTime += deltaTime;
+        _survivalTime += deltaTime * 10;
 
         if ( _survivalTime >= _victoryTime)
         {

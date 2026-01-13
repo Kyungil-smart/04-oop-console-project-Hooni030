@@ -31,6 +31,7 @@ public class PlayerCharacter : GameObject
 
     // 플레이어 레벨 및 경험치 관련 선언
     private string LevelIcon = "⭐";
+    private float _currentExp = 0;
     private int MaxExp;
     private float _expPercent;
     private string ExpIcon = "✨";
@@ -68,6 +69,7 @@ public class PlayerCharacter : GameObject
 
     public void StatInit()
     {
+        MaxExp = 4;
         StatUIWindow = new Ractangle(0, 7, Stat_UI_Width, Stat_UI_Height);
         LevelUIWindow = new Ractangle(27, 0, Level_UI_Width, Level_UI_Height);
 
@@ -275,7 +277,6 @@ public class PlayerCharacter : GameObject
         _expPercent = Exp.Value / MaxExp * 10;
         if (_expPercent >= 10)
         {
-            Debug.Log($"{_expPercent}");
             Exp.Value = Exp.Value - MaxExp;
             Level.Value++;
         }
