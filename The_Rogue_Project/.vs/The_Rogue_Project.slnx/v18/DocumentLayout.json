@@ -71,8 +71,7 @@
               "ViewState": "AgIAAAMBAAAAAAAAAAAkwAEBAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-08T08:44:45.742Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -82,7 +81,7 @@
               "RelativeDocumentMoniker": "GameObjects\\ExpOrb.cs",
               "ToolTip": "C:\\Users\\shins\\Documents\\GitHub\\04-oop-console-project-Hooni030\\The_Rogue_Project\\GameObjects\\ExpOrb.cs",
               "RelativeToolTip": "GameObjects\\ExpOrb.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAswBEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-12T08:39:17.143Z",
               "IsPinned": true,
