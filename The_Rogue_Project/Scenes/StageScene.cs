@@ -530,12 +530,14 @@ public class StageScene : Scene
     // 몬스터 처치 시 실행 메서드
     private void KillMonster(Monster monster)
     {
+        // 몬스터 위치 저장
         Vector pos = monster.Position;
+        // 필드에서 몬스터 제거
         if (_field[pos.Y, pos.X].OnTileObject == monster)
             _field[pos.Y, pos.X].OnTileObject = null;
 
         _monsters.Remove(monster);
-         
+        // 경험치 볼 드랍 메서드 호출
         DropExpOrb(pos);
     }
 
@@ -563,6 +565,7 @@ public class StageScene : Scene
     // EXP 오브 제거 메서드
     private void RemoveExpOrb(ExpOrb orb)
     {
+        // 필드에서 경험치 오브 제거
         if (_field[orb.Position.Y, orb.Position.X].OnTileObject == orb)
             _field[orb.Position.Y, orb.Position.X].OnTileObject = null;
 
@@ -600,7 +603,7 @@ public class StageScene : Scene
     {
         // 생존 시간 증가
         _survivalTime += deltaTime * 10;
-
+        // 승리 시간 도달 시 승리 씬으로 전환
         if ( _survivalTime >= _victoryTime)
         {
             SceneManager.ChangeScene("Victory");

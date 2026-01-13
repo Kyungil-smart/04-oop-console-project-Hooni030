@@ -25,10 +25,6 @@ public class PlayerCharacter : GameObject
     private const int Level_UI_Width = 26;
     private const int Level_UI_Height = 7;
 
-    // 
-    private MenuList _escapeStageMenu = new MenuList();
-    private bool isEscape = true;
-
     // 플레이어 레벨 및 경험치 관련 선언
     private string LevelIcon = "⭐";
     private float _currentExp = 0;
@@ -61,12 +57,8 @@ public class PlayerCharacter : GameObject
         Symbol = "🌟";
 
         StatInit();
-
-        _escapeStageMenu.Add("메인 메뉴로 돌아가기", null);
-        _escapeStageMenu.Add("예", () => SceneManager.ChangeScene("MainMenu"));
-        _escapeStageMenu.Add("아니요", () => isEscape = !isEscape);
     }
-
+    // 플레이어 스탯 초기화메서드
     public void StatInit()
     {
         MaxExp = 4;
@@ -81,6 +73,7 @@ public class PlayerCharacter : GameObject
         Level.AddListener(NextLevel);
         HP.AddListener(null);
     }
+    // 플레이어 스탯 클리어 메서드
     public void StatClear()
     {
         HP.Value = 0;
@@ -93,14 +86,16 @@ public class PlayerCharacter : GameObject
         Exp.ClearListener();
         Level.ClearListener();
     }
-
+    // 플레이어 상태 업데이트 메서드
     public void Update()
     {
-        if(_shootCooldown > 0d)
+        // 총알 발사 쿨타임 감소
+        if (_shootCooldown > 0d)
         {
             _shootCooldown -= Time.DeltaTime;
             if (_shootCooldown < 0d) _shootCooldown = 0d;
         }
+        // 스페이스바 입력시 공격 (총알 발사)
         if (InputManager.IsCorrectkey(ConsoleKey.Spacebar))
         {
             if (_shootCooldown <= 0f)
@@ -109,7 +104,7 @@ public class PlayerCharacter : GameObject
                 _shootCooldown = ShootInterval;
             }
         }
-
+        // 방향키 입력시 이동
         if (InputManager.IsCorrectkey(ConsoleKey.UpArrow))
         {
             FaceVector = Vector.Up;
@@ -130,18 +125,19 @@ public class PlayerCharacter : GameObject
             FaceVector = Vector.Right;
             Move(Vector.Right);
         }
+        // ESC 입력시 메인메뉴로 이동
         if (InputManager.IsCorrectkey(ConsoleKey.Escape))
         {
             SceneManager.ChangeScene("MainMenu");
         }
     }
 
-
+    // 플레이어 이동 메서드
     private void Move(Vector direction)
     {
+        // 필드가 비어있으면 리턴
         if (Field == null) return;
-
-
+        // 현재 위치와 다음 위치 계산
         Vector current = Position;
         Vector nextPos = current + direction;
 
@@ -149,13 +145,13 @@ public class PlayerCharacter : GameObject
         if (nextPos.X < 1 || nextPos.X > StageScene.Field_Width - 2 ||
             nextPos.Y < 1 || nextPos.Y > StageScene.Field_Height - 2)
             return;
-
+        // 2. 다음 타일 오브젝트 확인
         GameObject nextTileObject = Field[nextPos.Y, nextPos.X].OnTileObject;
 
-        // 이동불가 오브젝트 체크
+        // 3. 이동불가 오브젝트 체크
         if (nextTileObject is Wall || nextTileObject is Monster || nextTileObject is Bullet)
             return;
-
+        // 4. 상호작용 오브젝트 체크
         if (nextTileObject != null)
         {
             if (nextTileObject is IInteractable)
@@ -163,15 +159,17 @@ public class PlayerCharacter : GameObject
                 (nextTileObject as IInteractable)?.Interact(this);
             }
         }
-
+        // 5. 이동 처리
         Field[Position.Y, Position.X].OnTileObject = null;
         Field[nextPos.Y, nextPos.X].OnTileObject = this;
-
+        // 6. 위치 갱신
         Position = nextPos;
     }
 
+    // 플레이어가 데미지를 입는 메서드
     public void TakeDamage(int damage)
     {
+        // 음수 데미지 무시
         if (damage <= 0) return;
 
         // 방어막 먼저 소모
@@ -184,8 +182,10 @@ public class PlayerCharacter : GameObject
                 return;
             }
 
+            // 방어막이 다 깨졌을 때 남은 데미지 계산
             CurrentShield = 0;
-            damage = -shieldRemain; // 남은 데미지
+            // 남은 데미지만큼 체력에서 차감
+            damage = -shieldRemain; 
         }
 
         HP.Value -= damage;
@@ -196,6 +196,7 @@ public class PlayerCharacter : GameObject
         }
     }
 
+    
     public void Render()
     {
         StatUIWindow.Draw(ConsoleColor.Yellow);
@@ -247,7 +248,7 @@ public class PlayerCharacter : GameObject
         damageUI.Print();
 
         Console.SetCursorPosition(x, y+1);
-        for(int i = 0; i< AttackPoint; i++)
+        for(int i = 0; i< AttackPoint/2; i++)
         {
             _attackIcon.Print();
         }
